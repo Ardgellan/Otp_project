@@ -3,7 +3,6 @@ from datetime import datetime
 from loguru import logger
 
 from source.data import config
-from source.utils.models import GlobalStatistics, UserInfo, VpnConfigDB
 
 from .connector import DatabaseConnector
 

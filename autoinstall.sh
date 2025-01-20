@@ -107,7 +107,7 @@ cd ~/Otp_project
 poetry install --no-root
 cd
 
-sudo cat <<EOF > ~/VPNizator/source/data/.env
+sudo cat <<EOF > ~/Otp_project/source/data/.env
 TG_BOT_TOKEN = "$bot_token"
 TOTP_SECRET = "$totp_secret"
 ADMINS_IDS = "$admins_ids"
@@ -133,7 +133,7 @@ After=network.target
 Type=simple
 User=$current_os_user
 WorkingDirectory=/root/Otp_project
-ExecStart=/bin/bash -c 'cd ~/Otp_project/ && $(poetry env info --executable) main.py
+ExecStart=/bin/bash -c 'cd ~/Otp_project/ && $(poetry env info --executable) main.py'
 Restart=on-failure
 
 [Install]

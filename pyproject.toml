@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "otp-project"
+version = "0.1.0"
+description = ""
+authors = ["Ardgellan <aegiev01@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+telebot = "^0.0.5"
+pyotp = "^2.9.0"
+asyncpg = "^0.30.0"
+loguru = "^0.7.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

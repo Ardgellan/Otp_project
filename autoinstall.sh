@@ -96,6 +96,12 @@ python3.11 /root/get-pip.py
 #install poetry
 pip3.11 install poetry
 
+#configure postgresql
+su - postgres -c "psql -c \"CREATE USER $database_user WITH PASSWORD '$database_passwd';\""
+su - postgres -c "psql -c \"CREATE DATABASE $database_name;\""
+su - postgres -c "psql -c \"GRANT ALL PRIVILEGES ON SCHEMA public TO $database_user;\""
+su - postgres -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE $database_name TO $database_user;\""
+
 sudo timedatectl set-timezone Europe/Moscow
 
 #clone bot repo

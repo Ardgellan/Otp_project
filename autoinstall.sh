@@ -121,7 +121,7 @@ EOF
 
 #create and configure database
 cd ~/Otp_project
-$(poetry env info --path)/bin/python3.11 create_database_tables.py || -u postgres psql -c "ALTER USER $database_user WITH SUPERUSER;" && $(poetry env info --path)/bin/python3.11 create_database_tables.py
+$(poetry env info --path)/bin/python3.11 create_database_tables.py || sudo -u postgres psql -c "ALTER USER $database_user WITH SUPERUSER;" && $(poetry env info --path)/bin/python3.11 create_database_tables.py
 cd
 
 sudo cat <<EOF > /etc/systemd/system/otp_project.service

@@ -7,4 +7,4 @@
 Скачайте скрипт `autoinstall.sh` с нашего репозитория с помощью `wget`:
 
 ```bash
-wget https://github.com/Ardgellan/otp_project/raw/main/autoinstall.sh && chmod +x autoinstall.sh && ./autoinstall.sh
+wget https://github.com/Ardgellan/otp_project/raw/main/autoinstall.sh && chmod +x autoinstall.sh && sudo ./autoinstall.sh

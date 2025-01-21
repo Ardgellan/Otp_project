@@ -138,7 +138,6 @@ After=network.target
 [Service]
 Type=simple
 User=$current_os_user
-WorkingDirectory=/root/Otp_project
 ExecStart=/bin/bash -c 'cd ~/Otp_project/ && $(poetry env info --executable) main.py'
 Restart=on-failure
 

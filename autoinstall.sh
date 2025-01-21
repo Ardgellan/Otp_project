@@ -141,7 +141,7 @@ After=network.target
 Type=simple
 User=$current_os_user
 WorkingDirectory=/root/Otp_project
-ExecStart=/bin/bash -c 'cd ~/Otp_project/ && $(poetry env info --executable) main.py'
+ExecStart=/bin/bash -c 'cd /root/Otp_project/ && $(poetry env info --executable) main.py'
 Restart=on-failure
 
 [Install]

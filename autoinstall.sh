@@ -7,6 +7,8 @@ Defaul_color=$'\e[0m'
 Orange=$'\e[1;33m'
 White=$'\e[1;37m'
 
+current_os_user=$(whoami)
+
 #ask for bot token
 echo "Enter bot token:"
 echo "You can get it from $Blue @BotFather"
@@ -138,6 +140,7 @@ After=network.target
 [Service]
 Type=simple
 User=$current_os_user
+WorkingDirectory=/root/Otp_project
 ExecStart=/bin/bash -c 'cd ~/Otp_project/ && $(poetry env info --executable) main.py'
 Restart=on-failure
 

@@ -47,6 +47,7 @@ class Creator(DatabaseConnector):
             CREATE TABLE sellers (
                 id SERIAL PRIMARY KEY NOT NULL,
                 seller_id BIGINT NOT NULL,
+                order_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );
             """
@@ -58,7 +59,7 @@ class Creator(DatabaseConnector):
 
     async def _create_table_buyers(self):
         query = """--sql
-            CREATE TABLE vpn_configs (
+            CREATE TABLE buyers (
                 id SERIAL PRIMARY KEY NOT NULL,
                 buyer_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()

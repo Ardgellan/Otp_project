@@ -46,7 +46,7 @@ class Creator(DatabaseConnector):
         query = """--sql
             CREATE TABLE sellers (
                 id SERIAL PRIMARY KEY NOT NULL,
-                seller_id BIGINT PRIMARY KEY NOT NULL,
+                seller_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );
             """
@@ -60,7 +60,7 @@ class Creator(DatabaseConnector):
         query = """--sql
             CREATE TABLE vpn_configs (
                 id SERIAL PRIMARY KEY NOT NULL,
-                buyer_id BIGINT NOT NULL REFERENCES users(user_id),
+                buyer_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );
             """

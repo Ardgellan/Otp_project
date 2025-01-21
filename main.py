@@ -11,7 +11,7 @@ TOTP_SECRET = config.totp_secret
 bot = telebot.TeleBot(API_TOKEN)
 
 # Хранение разрешённых пользователей (ID Telegram)
-AUTHORIZED_USERS = {470464896}  # Укажите свой ID
+AUTHORIZED_USERS = config.admins_ids
 
 # Генерация TOTP кода
 def generate_totp():

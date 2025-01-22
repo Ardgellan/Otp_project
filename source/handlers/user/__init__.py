@@ -2,6 +2,8 @@ from aiogram import Dispatcher
 
 from loader import dp
 
+from .start import start
+
 def register_user_handlers(dp: Dispatcher):
     try:
 

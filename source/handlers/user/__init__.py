@@ -1,4 +1,5 @@
 from aiogram import Dispatcher
+from loguru import logger
 
 from loader import dp
 

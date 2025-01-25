@@ -11,6 +11,6 @@ class LocalizedButtonText(BaseLocalizedObject):
         super().__init__(entity_type="button")
 
     @property
-    def main_menu(self) -> LocalizedText:
-        return self._get_entity_text("main_menu")
+    def main_menu_button(self) -> LocalizedText:
+        return self._get_entity_text("main_menu_button")
 

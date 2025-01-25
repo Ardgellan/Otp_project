@@ -6,9 +6,9 @@
         }
     },
     "button": {
-        "main_menu": {
-            "en": "",
-            "ru": ""
+        "main_menu_button": {
+            "en": "Main menu",
+            "ru": "Главное меню"
         }
     }
 }

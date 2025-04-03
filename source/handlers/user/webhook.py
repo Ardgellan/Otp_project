@@ -35,24 +35,17 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    if request.method == 'POST':
-        data = request.get_json()
+    """Обработчик Webhook (без проверок)."""
+    data = request.get_json()
 
-        logger.info(f"Received data: {json.dumps(data, indent=2)}")
+    logger.info(f"Received data: {json.dumps(data, indent=2)}")
 
-        if data.get('status') == 200:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            loop.run_until_complete(execute_start())  # <-- Запускаем асинхронную функцию в новом event loop
-            loop.close()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(execute_start())  
+    loop.close()
 
-            return 'success', 200
-        else:
-            logger.error(f"Received unexpected status: {data.get('status')}")
-            return 'failure', 400
-    else:
-        abort(400)
-
+    return 'success', 200
 
 async def execute_start():
     # Запускаем вашу функцию start

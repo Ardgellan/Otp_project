@@ -1,6 +1,7 @@
 from loguru import logger
 import random
-import datetime
+from datetime import datetime
+
 
 from .connector import DatabaseConnector
 

@@ -2,8 +2,6 @@ from flask import Flask, request, abort
 from loguru import logger
 import json
 import asyncio
-import logging
-import sys
 
 # Импортируем уже инициализированные компоненты из loader.py
 from loader import bot  # импортируем глобально инициализированный объект bot

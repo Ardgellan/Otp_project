@@ -11,15 +11,6 @@ from source.handlers.user.start import test_function
 # Настройка Flask
 app = Flask(__name__)
 
-def configure_flask_logging():
-    flask_logger = logging.getLogger('flask')  # Получаем логгер Flask
-    flask_logger.setLevel(logging.INFO)  # Устанавливаем уровень логирования
-    flask_logger.addHandler(logging.StreamHandler(sys.stdout))  # Перенаправляем логи во внешний вывод (консоль)
-    # Перенаправляем все логи в loguru
-    flask_logger.addHandler(logger._handlers[0])  # Это добавляет обработчик loguru для перенаправления логов
-
-# Перенастроим Flask для использования loguru
-configure_flask_logging()
 
 @app.route('/webhook', methods=['POST'])
 def webhook():

@@ -11,27 +11,15 @@ from source.handlers.user.start import test_function
 # Настройка Flask
 app = Flask(__name__)
 
-# @app.route('/webhook', methods=['POST'])
-# def webhook():
-#     if request.method == 'POST':
-#         # Получаем данные от Digiseller в формате JSON
-#         data = request.get_json()
+def configure_flask_logging():
+    flask_logger = logging.getLogger('flask')  # Получаем логгер Flask
+    flask_logger.setLevel(logging.INFO)  # Устанавливаем уровень логирования
+    flask_logger.addHandler(logging.StreamHandler(sys.stdout))  # Перенаправляем логи во внешний вывод (консоль)
+    # Перенаправляем все логи в loguru
+    flask_logger.addHandler(logger._handlers[0])  # Это добавляет обработчик loguru для перенаправления логов
 
-#         # Логируем полученные данные для отладки
-#         logger.info(f"Received data: {json.dumps(data, indent=2)}")
-
-#         # Проверяем статус от Digiseller, который должен быть 200 или успешное событие
-#         if data.get('status') == 200:  # Предположим, что статус в ответе Digiseller = 200
-#             # Запускаем вашу логику (выполняем функцию start)
-#             asyncio.create_task(execute_start())  # Запуск асинхронной задачи
-
-#             return 'success', 200
-#         else:
-#             logger.error(f"Received unexpected status: {data.get('status')}")
-#             return 'failure', 400
-#     else:
-#         abort(400)
-
+# Перенастроим Flask для использования loguru
+configure_flask_logging()
 
 @app.route('/webhook', methods=['POST'])
 def webhook():

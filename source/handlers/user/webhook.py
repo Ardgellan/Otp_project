@@ -5,7 +5,7 @@ import asyncio
 
 # Импортируем уже инициализированные компоненты из loader.py
 from loader import bot  # импортируем глобально инициализированный объект bot
-from source.handlers.user import start  # импортируем вашу логику старта
+from source.handlers.user.start import test_function
 
 
 # Настройка Flask
@@ -42,14 +42,14 @@ def webhook():
 
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(execute_start())  
+    loop.run_until_complete(execute_test_function())  
     loop.close()
 
     return 'success', 200
 
-async def execute_start():
+async def execute_test_function():
     # Запускаем вашу функцию start
-    await start()  # start должна использовать глобально инициализированный bot
+    await test_function()  # start должна использовать глобально инициализированный bot
 
 
 if __name__ == '__main__':

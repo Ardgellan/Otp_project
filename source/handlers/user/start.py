@@ -1,5 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from loguru import logger
 
 from source.utils import localizer
 from source.keyboard import inline
@@ -25,3 +26,7 @@ async def main_menu_by_button(call: types.CallbackQuery, state: FSMContext):
             language_code=call.from_user.language_code,
         )
     )
+
+async def test_function():
+    """Временная функция для проверки работы вебхука"""
+    logger.info("✅ Webhook вызван, асинхронная функция запущена!")

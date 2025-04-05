@@ -18,6 +18,8 @@ class Creator(DatabaseConnector):
         logger.warning("Creating all tables...")
         await self._create_table_sellers()
         await self._create_table_buyers()
+        await self._create_table_orders()
+        await self._create_table_products()
         logger.warning("All tables were created")
 
 
@@ -92,11 +94,6 @@ class Creator(DatabaseConnector):
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );
             """
-
-        if await self._execute_query(query) == []:
-            logger.debug("Table sellers was created")
-        else:
-            logger.error("Error while creating table sellers")
 
         if await self._execute_query(query) == []:
             logger.debug("Table sellers was created")

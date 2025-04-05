@@ -105,7 +105,7 @@ class Creator(DatabaseConnector):
         query = """--sql
             CREATE TABLE buyers (
                 id SERIAL PRIMARY KEY NOT NULL,
-                buyer_id
+                buyer_id BIGINT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );
             """

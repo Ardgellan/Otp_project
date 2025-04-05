@@ -70,7 +70,7 @@ class Creator(DatabaseConnector):
     
     async def _create_table_products(self):
         query = """--sql
-            CREATE TABLE orders (
+            CREATE TABLE products (
                 id SERIAL PRIMARY KEY NOT NULL,
                 seller_id BIGINT NOT NULL,
                 product_id BIGINT NOT NULL,

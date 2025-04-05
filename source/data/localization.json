@@ -1,14 +1,22 @@
 {
     "message": {
         "greetings_message": {
-            "en": "Salam",
-            "ru": "Салам"
+            "en": "👋 Welcome to the OTP Project! We help automate the issuance of OTP keys to Digiseller subscription buyers! 🚀\n\nPlease indicate who you are?❓❓❓",
+            "ru": "👋 Добро пожаловать в OTP Project! Мы помогаем автоматизировать выдачу OTP ключей покупателям подписок на Digiseller! 🚀\n\nПожалуйста укажите кто Вы?❓❓❓"
         }
     },
     "button": {
         "main_menu_button": {
             "en": "Main menu",
             "ru": "Главное меню"
+        },
+        "seller_button": {
+            "en": "💰 Seller",
+            "ru": "💰 Продавец"
+        },
+        "buyer_button": {
+            "en": "💸 Buyer",
+            "ru": "💸 Покупатель"
         }
     }
 }

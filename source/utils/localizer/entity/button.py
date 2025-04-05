@@ -14,3 +14,11 @@ class LocalizedButtonText(BaseLocalizedObject):
     def main_menu_button(self) -> LocalizedText:
         return self._get_entity_text("main_menu_button")
 
+    @property
+    def seller_button(self) -> LocalizedText:
+        return self._get_entity_text("seller_button")
+
+    @property
+    def buyer_button(self) -> LocalizedText:
+        return self._get_entity_text("buyer_button")
+

@@ -17,6 +17,7 @@ async def start(message: types.Message):
         )
     )
 
+
 async def main_menu_by_button(call: types.CallbackQuery, state: FSMContext):
     await call.message.answer(
         text=localizer.get_user_localized_text(
@@ -27,6 +28,8 @@ async def main_menu_by_button(call: types.CallbackQuery, state: FSMContext):
             language_code=call.from_user.language_code,
         )
     )
+
+
 async def test_function():
     """Временная функция для проверки работы вебхука"""
     logger.info("✅ Webhook вызван, асинхронная функция запущена!")

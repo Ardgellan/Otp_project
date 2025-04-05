@@ -20,14 +20,14 @@ async def start_menu_kb(language_code: str):
         InlineKeyboardButton(
             text=localizer.get_user_localized_text(
                 user_language_code=language_code,
-                text_localization=localizer.button.main_menu_button,
+                text_localization=localizer.button.seller_button,
             ),
             callback_data="seller_button",
         ),
         InlineKeyboardButton(
             text=localizer.get_user_localized_text(
                 user_language_code=language_code,
-                text_localization=localizer.button.main_menu_button,
+                text_localization=localizer.button.buyer_button,
             ),
             callback_data="buyer_button",
         ),

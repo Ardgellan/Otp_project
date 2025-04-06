@@ -7,6 +7,7 @@ from source.keyboard import inline
 from loader import db_manager
 
 async def seller_start_menu(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("Salam")
     await db_manager.upsert_user(
         user_id=message.from_user.id,
     )

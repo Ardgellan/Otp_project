@@ -8,7 +8,6 @@ from .seller import *
 
 def register_user_handlers(dp: Dispatcher):
     try:
-
         dp.register_message_handler(start, commands=["start"], state="*")
 
         dp.register_callback_query_handler(

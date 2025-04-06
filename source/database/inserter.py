@@ -12,7 +12,7 @@ class Inserter(DatabaseConnector):
         logger.debug("Inserter object was initialized")
 
 
-    async def upsert_user(self, seller_id: int):
+    async def upsert_seller(self, seller_id: int):
         query = f"""--sql
             INSERT INTO sellers (seller_id)
             VALUES ({seller_id})

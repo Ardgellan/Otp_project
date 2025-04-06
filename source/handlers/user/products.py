@@ -9,6 +9,7 @@ from loader import db_manager
 from source.utils.states.seller_states import ProductInputFlow
 
 async def request_user_for_product_name(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("Salam_1")
     await call.message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=call.from_user.language_code,
@@ -22,6 +23,7 @@ async def request_user_for_product_name(call: types.CallbackQuery, state: FSMCon
 
 # Обработчик для ввода имени товара
 async def handle_product_name(message: types.Message, state: FSMContext):
+    logger.debug("Salam_2")
     # Получаем имя товара от пользователя
     product_name = message.text
     # Сохраняем его в состояние FSM
@@ -32,6 +34,7 @@ async def handle_product_name(message: types.Message, state: FSMContext):
 
 
 async def request_user_for_product_id(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("Salam_3")
     await call.message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=call.from_user.language_code,
@@ -45,6 +48,7 @@ async def request_user_for_product_id(call: types.CallbackQuery, state: FSMConte
 
 # Обработчик для ввода ID товара
 async def handle_product_id(message: types.Message, state: FSMContext):
+    logger.debug("Salam_4")
     # Получаем ID товара от пользователя
     product_id = message.text
     # Сохраняем его в состояние FSM
@@ -55,6 +59,7 @@ async def handle_product_id(message: types.Message, state: FSMContext):
 
 
 async def request_user_for_product_otp(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("Salam_5")
     await call.message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=call.from_user.language_code,
@@ -68,6 +73,7 @@ async def request_user_for_product_otp(call: types.CallbackQuery, state: FSMCont
 
 # Обработчик для ввода OTP товара
 async def handle_product_otp(message: types.Message, state: FSMContext):
+    logger.debug("Salam_6")
     # Получаем OTP от пользователя
     product_otp = message.text
     # Сохраняем его в состояние FSM
@@ -79,6 +85,7 @@ async def handle_product_otp(message: types.Message, state: FSMContext):
 
 # Функция для добавления товара в БД и уведомления пользователя
 async def add_product_to_db_and_notify(message: types.Message, state: FSMContext):
+    logger.debug("Salam_7")
     # Получаем данные из состояния FSM
     data = await state.get_data()
 

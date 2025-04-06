@@ -15,9 +15,7 @@ class Inserter(DatabaseConnector):
     async def upsert_seller(self, seller_id: int):
         query = f"""--sql
             INSERT INTO sellers (seller_id)
-            VALUES ({seller_id})
-            ON CONFLICT (seller_id)
-            DO NOTHING;
+            VALUES ({seller_id});
         """
         await self._execute_query(query)
         logger.debug(f"User {seller_id} was upserted (if not already exists)")

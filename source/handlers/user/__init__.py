@@ -5,6 +5,7 @@ from loader import dp
 
 from .start import *
 from .seller import *
+from .products import *
 
 def register_user_handlers(dp: Dispatcher):
     try:

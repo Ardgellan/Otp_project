@@ -42,6 +42,7 @@ async def request_user_for_product_id(call: types.CallbackQuery, state: FSMConte
         ),
         parse_mode=types.ParseMode.HTML,
     )
+    logger.debug("Balam_3")
     await ProductInputFlow.waiting_for_product_id.set()
     await call.answer()
 

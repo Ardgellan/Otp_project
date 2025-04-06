@@ -26,7 +26,7 @@ def register_user_handlers(dp: Dispatcher):
         # FSM-хендлер: старт добавления продукта
         dp.register_callback_query_handler(
             request_user_for_product_name,
-            lambda call: call.data == "add_product",  # кнопка должна иметь такой data
+            lambda call: call.data == "add_product_button",  # кнопка должна иметь такой data
             state="*"
         )
 

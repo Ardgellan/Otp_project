@@ -87,8 +87,7 @@ class Creator(DatabaseConnector):
     async def _create_table_sellers(self):
         query = """--sql
             CREATE TABLE sellers (
-                id SERIAL PRIMARY KEY NOT NULL,
-                seller_id BIGINT UNIQUE NOT NULL,
+                seller_id BIGINT PRIMARY KEY NOT NULL,
                 subscription_is_active BOOLEAN NOT NULL DEFAULT FALSE,
                 last_subscription_payment TIMESTAMP NOT NULL DEFAULT TO_TIMESTAMP(0),
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()

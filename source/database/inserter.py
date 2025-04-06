@@ -11,17 +11,17 @@ class Inserter(DatabaseConnector):
         super().__init__()
         logger.debug("Inserter object was initialized")
 
-    async def upsert_user(self, user_id: int, username: str):
+
+    async def upsert_user(self, seller_id: int):
         query = f"""--sql
-                INSERT INTO users (user_id, username, subscription_end_date)
-                VALUES ({user_id},'{username}', DATE '2030-01-01')
-                ON CONFLICT (user_id)
-                DO UPDATE SET username = '{username}', subscription_end_date = DATE '2030-01-01';
-            """
-
+            INSERT INTO sellers (seller_id)
+            VALUES ({seller_id})
+            ON CONFLICT (seller_id)
+            DO NOTHING;
+        """
         await self._execute_query(query)
+        logger.debug(f"User {seller_id} was upserted (if not already exists)")
 
-        logger.debug(f"User {user_id} was upserted")
 
 
     async def insert_fake_sellers_data(self, num_entries: int = 1):

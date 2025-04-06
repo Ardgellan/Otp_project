@@ -33,11 +33,11 @@ async def handle_product_name(message: types.Message, state: FSMContext):
     await request_user_for_product_id(message, state)
 
 
-async def request_user_for_product_id(call: types.CallbackQuery, state: FSMContext):
+async def request_user_for_product_id(message: types.Message, state: FSMContext):
     logger.debug("Salam_3")
-    await call.message.answer(
+    await message.answer(
         text=localizer.get_user_localized_text(
-            user_language_code=call.from_user.language_code,
+            user_language_code=message.from_user.language_code,
             text_localization=localizer.message.request_product_id_message,
         ),
         parse_mode=types.ParseMode.HTML,
@@ -59,11 +59,11 @@ async def handle_product_id(message: types.Message, state: FSMContext):
     await request_user_for_product_otp(message, state)
 
 
-async def request_user_for_product_otp(call: types.CallbackQuery, state: FSMContext):
+async def request_user_for_product_otp(message: types.Message, state: FSMContext):
     logger.debug("Salam_5")
-    await call.message.answer(
+    await message.answer(
         text=localizer.get_user_localized_text(
-            user_language_code=call.from_user.language_code,
+            user_language_code=message.from_user.language_code,
             text_localization=localizer.message.request_product_otp_message,
         ),
         parse_mode=types.ParseMode.HTML,

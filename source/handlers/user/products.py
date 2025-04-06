@@ -97,9 +97,9 @@ async def add_product_to_db_and_notify(message: types.Message, state: FSMContext
     try:
         await db_manager.add_product(
             seller_id=message.from_user.id,
-            name=data['product_name'],
+            product_name=data['product_name'],
             product_id=data['product_id'],
-            otp=data['product_otp']
+            product_otp=data['product_otp']
         )
         logger.info(f"Товар {data['product_name']} добавлен в БД успешно.")
 

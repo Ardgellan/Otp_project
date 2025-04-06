@@ -22,3 +22,25 @@ class LocalizedButtonText(BaseLocalizedObject):
     def buyer_button(self) -> LocalizedText:
         return self._get_entity_text("buyer_button")
 
+    @property
+    def trial_period_button(self) -> LocalizedText:
+        return self._get_entity_text("trial_period_button")
+
+    @property
+    def pay_subscription_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_subscription_button")
+
+    @property
+    def status_subscription_button(self) -> LocalizedText:
+        return self._get_entity_text("status_subscription_button")
+
+    @property
+    def my_products_button(self) -> LocalizedText:
+        return self._get_entity_text("my_products_button")
+
+    @property
+    def add_product_button(self) -> LocalizedText:
+        return self._get_entity_text("add_product_button")
+
+
+

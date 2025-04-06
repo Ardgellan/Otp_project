@@ -13,4 +13,8 @@ class LocalizedMessageText(BaseLocalizedObject):
     @property
     def greetings_message(self) -> LocalizedText:
         return self._get_entity_text("greetings_message")
+    
+    @property
+    def seller_menu_message(self) -> LocalizedText:
+        return self._get_entity_text("seller_menu_message")
 

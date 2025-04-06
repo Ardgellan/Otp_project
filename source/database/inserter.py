@@ -22,10 +22,10 @@ class Inserter(DatabaseConnector):
         logger.debug(f"User {seller_id} was upserted (if not already exists)")
 
 
-    async def add_product(self, user_id: int, name: str, product_id: str, otp: str):
+    async def add_product(self, seller_id: int, name: str, product_id: str, otp: str):
         query = f"""--sql
-            INSERT INTO products (user_id, name, product_id, otp)
-            VALUES ({user_id}, '{name}', '{product_id}', '{otp}');
+            INSERT INTO products (seller_id, name, product_id, otp)
+            VALUES ({seller_id}, '{name}', '{product_id}', '{otp}');
         """
         await self._execute_query(query)
         logger.debug(f"Product {name} (ID: {product_id}) added to the database by user {user_id}.")

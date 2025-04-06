@@ -7,6 +7,26 @@
         "seller_menu_message": {
             "en": "This is the seller menu. Here you can find the main sections that are available to you. 👨‍💻",
             "ru": " Это меню продавца. Тут ты можешь найти основные разделы которые тебе доступны. 👨‍💻"
+        },
+        "request_product_name_message": {
+            "en": "Название товара",
+            "ru": "Название товара"
+        },
+        "request_product_id_message": {
+            "en": "ID Товара",
+            "ru": "ID Товара"
+        },
+        "request_product_otp_message": {
+            "en": "OTP",
+            "ru": "OTP"
+        },
+        "product_successfully_added_message": {
+            "en": "Покайфу",
+            "ru": "Покайфу"
+        },
+        "error_adding_product_message": {
+            "en": "Давай по новой",
+            "ru": "Давай по новой"
         }
     },
     "button": {
@@ -36,7 +56,7 @@
         },
         "my_products_button": {
             "en": "📃 My products",
-            "ru": "📃 Мои товар"
+            "ru": "📃 Мои товары"
         },
         "add_product_button": {
             "en": "📇 Add product",

@@ -18,3 +18,24 @@ class LocalizedMessageText(BaseLocalizedObject):
     def seller_menu_message(self) -> LocalizedText:
         return self._get_entity_text("seller_menu_message")
 
+    @property
+    def request_product_name_message(self) -> LocalizedText:
+        return self._get_entity_text("request_product_name_message")
+
+    @property
+    def request_product_id_message(self) -> LocalizedText:
+        return self._get_entity_text("request_product_id_message")
+
+    @property
+    def request_product_otp_message(self) -> LocalizedText:
+        return self._get_entity_text("request_product_otp_message")
+
+    @property
+    def product_successfully_added_message(self) -> LocalizedText:
+        return self._get_entity_text("product_successfully_added_message")
+
+    @property
+    def error_adding_product_message(self) -> LocalizedText:
+        return self._get_entity_text("error_adding_product_message")
+
+

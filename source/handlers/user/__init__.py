@@ -22,6 +22,29 @@ def register_user_handlers(dp: Dispatcher):
             state="*",
         )
 
+        # FSM-хендлер: старт добавления продукта
+        dp.register_callback_query_handler(
+            request_user_for_product_name,
+            lambda call: call.data == "add_product",  # кнопка должна иметь такой data
+            state="*"
+        )
+
+         # Обработчики для каждого этапа ввода данных
+        dp.register_message_handler(
+            handle_product_name,
+            state=ProductInputFlow.waiting_for_product_name
+        )
+
+        dp.register_message_handler(
+            handle_product_id,
+            state=ProductInputFlow.waiting_for_product_id
+        )
+
+        dp.register_message_handler(
+            handle_product_otp,
+            state=ProductInputFlow.waiting_for_product_otp
+        )
+
     except Exception as e:
         logger.error(f"Error while registering user handlers: {e}")
     else:

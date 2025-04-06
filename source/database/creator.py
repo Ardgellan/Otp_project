@@ -73,6 +73,7 @@ class Creator(DatabaseConnector):
             CREATE TABLE products (
                 id SERIAL PRIMARY KEY NOT NULL,
                 seller_id BIGINT NOT NULL,
+                product_name VARCHAR(128),
                 product_id BIGINT NOT NULL,
                 product_otp VARCHAR(128) NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()

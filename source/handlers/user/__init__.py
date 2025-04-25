@@ -7,7 +7,7 @@ from .start import *
 from .seller import *
 from .products import *
 
-def register_user_handlers(dp: Dispatcher):
+def register_seller_handlers(dp: Dispatcher):
     try:
         dp.register_message_handler(start, commands=["start"], state="*")
 
@@ -53,6 +53,6 @@ def register_user_handlers(dp: Dispatcher):
         )
 
     except Exception as e:
-        logger.error(f"Error while registering user handlers: {e}")
+        logger.error(f"Error while registering seller handlers: {e}")
     else:
-        logger.info("User handlers registered successfully")
+        logger.info("Seller handlers registered successfully")

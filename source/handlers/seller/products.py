@@ -126,3 +126,20 @@ async def add_product_to_db_and_notify(message: types.Message, state: FSMContext
         )
         await state.finish()
 
+
+async def show_product_info(callback_query: CallbackQuery):
+    product_id = int(callback_query.data.split("_")[1])
+    product = await db_manager.get_product_by_id(product_id)
+
+    if product:
+        text = (
+            f"🛒 <b>{product['product_name']}</b>\n"
+            f"🆔 ID: <code>{product['product_id']}</code>\n"
+            f"🔐 OTP: <code>{product['product_otp']}</code>\n"
+            f"📅 Добавлено: {product['created_at'].strftime('%Y-%m-%d %H:%M')}"
+        )
+    else:
+        text = "❌ Товар не найден."
+
+    await bot.answer_callback_query(callback_query.id)
+    await bot.send_message(callback_query.from_user.id, text, parse_mode="HTML")

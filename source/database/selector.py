@@ -43,3 +43,22 @@ class Selector(DatabaseConnector):
         ]
     
         return products
+
+
+    async def get_product_by_id(self, product_id: int) -> dict | None:
+        query = """
+            SELECT product_name, product_id, product_otp, created_at
+            FROM products
+            WHERE product_id = $1;
+        """
+        result = await self._execute_query(query, product_id)
+        if result:
+            row = result[0]
+            return {
+                "product_name": row[0],
+                "product_id": row[1],
+                "product_otp": row[2],
+                "created_at": row[3],
+            }
+        return None
+

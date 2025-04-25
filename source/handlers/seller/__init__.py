@@ -52,6 +52,18 @@ def register_seller_handlers(dp: Dispatcher):
             state="*"
         )
 
+        dp.register_callback_query_handler(
+            show_seller_products,
+            lambda call: call.data == "my_products_button",  # кнопка должна иметь такой data
+            state="*"
+        )
+
+        dp.register_callback_query_handler(
+            show_product_info,
+            lambda call: call.data.startswith("product_"),
+            state="*",
+        )
+
     except Exception as e:
         logger.error(f"Error while registering seller handlers: {e}")
     else:

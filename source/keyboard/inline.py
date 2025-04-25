@@ -106,15 +106,14 @@ async def seller_products_list_keyboard(seller_id: int, language_code: str) -> I
     seller_products = await db_manager.get_seller_products(seller_id)
     keyboard = InlineKeyboardMarkup(row_width=2)
 
-    # Кнопка "Добавить новый товар"
-    # add_product_button = InlineKeyboardButton(
-    #     text=localizer.get_user_localized_text(
-    #         user_language_code=language_code,
-    #         text_localization=localizer.button.add_new_product,
-    #     ),
-    #     callback_data="add_new_product",
-    # )
-    # keyboard.insert(add_product_button)
+    add_product_button = InlineKeyboardButton(
+        text=localizer.get_user_localized_text(
+            user_language_code=language_code,
+            text_localization=localizer.button.add_new_product,
+        ),
+        callback_data="add_new_product",
+    )
+    keyboard.insert(add_product_button)
 
     # Добавляем кнопки с товарами, если они есть
     if seller_products:

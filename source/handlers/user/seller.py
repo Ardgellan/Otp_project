@@ -23,7 +23,7 @@ async def seller_start_menu(call: types.CallbackQuery, state: FSMContext):
     )
 
 async def show_seller_products(call: types.CallbackQuery, state: FSMContext):
-    logger.debug("Salam")
+    logger.debug("Salam_products_list")
     
     await call.message.answer(
         text=localizer.get_user_localized_text(

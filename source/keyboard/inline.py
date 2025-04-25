@@ -102,6 +102,7 @@ async def seller_keyboard(language_code: str):
 
 async def seller_products_list_keyboard(user_id: int, language_code: str) -> InlineKeyboardMarkup:
     # Получаем продукты продавца
+    logger.debug("Salam klaviatura prodavca_1")
     seller_products = await db_manager.get_seller_products(user_id)
     keyboard = InlineKeyboardMarkup(row_width=2)
 

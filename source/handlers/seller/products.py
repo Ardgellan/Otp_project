@@ -169,7 +169,14 @@ async def show_product_info(call: types.CallbackQuery, state: FSMContext):
             logger.warning(f"Product with ID {product_id} not found in database.")
 
         await call.answer()
-        await call.message.answer(text, parse_mode="HTML")
+        await call.message.answer(
+            text,
+            parse_mode="HTML",
+            reply_markup=await inline.specific_product_keyboard(
+                language_code=call.from_user.language_code,
+                product_id=product_id
+            )
+        )
 
     except Exception as e:
         logger.error(f"Exception in show_product_info: {e}", exc_info=True)

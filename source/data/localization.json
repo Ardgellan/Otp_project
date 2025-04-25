@@ -65,6 +65,14 @@
         "add_product_button": {
             "en": "📇 Add product",
             "ru": "📇 Добавить товар"
+        },
+        "edit_product_button": {
+            "en": "📇 Edit product",
+            "ru": "📇 Редактировать товар"
+        },
+        "delete_product_button": {
+            "en": "📇 Delete product",
+            "ru": "📇 Удалить товар"
         }
     }
 }

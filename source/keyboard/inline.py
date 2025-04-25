@@ -106,14 +106,17 @@ async def seller_products_list_keyboard(seller_id: int, language_code: str) -> I
     seller_products = await db_manager.get_seller_products(seller_id)
     keyboard = InlineKeyboardMarkup(row_width=2)
 
-    add_product_button = InlineKeyboardButton(
+    buttons = [
+        InlineKeyboardButton(
         text=localizer.get_user_localized_text(
             user_language_code=language_code,
             text_localization=localizer.button.add_product_button,
         ),
         callback_data="add_product_button",
-    )
-    keyboard.add(add_product_button)
+    ),
+    ]
+
+    keyboard.add(buttons)
 
     # Добавляем кнопки с товарами, если они есть
     if seller_products:
@@ -127,6 +130,32 @@ async def seller_products_list_keyboard(seller_id: int, language_code: str) -> I
         keyboard.add(*product_buttons)
 
     # Кнопка "Назад в главное меню"
+    keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
+
+    return keyboard
+
+async def specific_product_keyboard(product_id: int, language_code: str) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    
+    buttons = [
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.edit_product_button,
+            ),
+            callback_data=f"edit_product_{product_id}",
+        ),
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.delete_product_button,
+            ),
+            callback_data=f"delete_product_{product_id}",
+        ),
+    ]
+
+    keyboard.add(*buttons)
+
     keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 
     return keyboard

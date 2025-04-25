@@ -127,7 +127,7 @@ async def add_product_to_db_and_notify(message: types.Message, state: FSMContext
         await state.finish()
 
 
-async def show_product_info(callback_query: CallbackQuery):
+async def show_product_info(call: types.CallbackQuery, state: FSMContext):
     product_id = int(callback_query.data.split("_")[1])
     product = await db_manager.get_product_by_id(product_id)
 

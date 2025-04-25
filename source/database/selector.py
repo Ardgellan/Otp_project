@@ -23,3 +23,23 @@ class Selector(DatabaseConnector):
         result = await self._execute_query(query)
         logger.debug(f"Seller {seller_id} exist: {result[0][0]}")
         return result[0][0]
+
+
+    async def get_seller_products(self, seller_id: int) -> list[dict]:
+        query = """
+            SELECT product_name, product_id
+            FROM products
+            WHERE seller_id = $1;
+        """
+        result = await self._execute_query(query, seller_id)
+        logger.debug(f"Found {len(result)} products for seller {seller_id}")
+
+        products = [
+            {
+                "product_name": row[0],
+                "product_id": row[1],
+            }
+            for row in result
+        ]
+    
+        return products

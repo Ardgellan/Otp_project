@@ -27,6 +27,10 @@
         "error_adding_product_message": {
             "en": "Давай по новой",
             "ru": "Давай по новой"
+        },
+        "show_seller_products_message": {
+            "en": "This is the list of your projects 📃",
+            "ru": "Это список ваших товаров 📃"
         }
     },
     "button": {

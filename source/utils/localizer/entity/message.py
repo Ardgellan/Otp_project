@@ -38,4 +38,8 @@ class LocalizedMessageText(BaseLocalizedObject):
     def error_adding_product_message(self) -> LocalizedText:
         return self._get_entity_text("error_adding_product_message")
 
+    @property
+    def show_seller_products_message(self) -> LocalizedText:
+        return self._get_entity_text("show_seller_products_message")
+
 

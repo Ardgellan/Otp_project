@@ -7,6 +7,24 @@ from source.utils.callback import support_callback
 
 from loguru import logger
 
+
+async def insert_button_back_to_main_menu(
+    keyboard: InlineKeyboardMarkup | None = None, language_code: str = "ru"
+):
+    if not keyboard:
+        keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.main_menu_button,
+            ),
+            callback_data="main_menu_button",
+        )
+    )
+    return keyboard
+
+
 async def start_menu_kb(language_code: str):
     keyboard = InlineKeyboardMarkup(row_width=1)
     buttons = [
@@ -24,17 +42,12 @@ async def start_menu_kb(language_code: str):
             ),
             callback_data="buyer_button",
         ),
-        InlineKeyboardButton(
-            text=localizer.get_user_localized_text(
-                user_language_code=language_code,
-                text_localization=localizer.button.main_menu_button,
-            ),
-            callback_data="main_menu_button",
-        ),
     ]
 
     for button in buttons:
         keyboard.insert(button)
+
+    keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 
     return keyboard
 
@@ -77,16 +90,43 @@ async def seller_keyboard(language_code: str):
             ),
             callback_data="add_product_button",
         ),
-        InlineKeyboardButton(
-            text=localizer.get_user_localized_text(
-                user_language_code=language_code,
-                text_localization=localizer.button.main_menu_button,
-            ),
-            callback_data="main_menu_button",
-        ),
     ]
 
     for button in buttons:
         keyboard.insert(button)
+
+    keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
+
+    return keyboard
+
+
+async def seller_products_list_keyboard(user_id: int, language_code: str) -> InlineKeyboardMarkup:
+    # Получаем продукты продавца
+    seller_products = await db_manager.get_seller_products(user_id)
+    keyboard = InlineKeyboardMarkup(row_width=2)
+
+    # Кнопка "Добавить новый товар"
+    # add_product_button = InlineKeyboardButton(
+    #     text=localizer.get_user_localized_text(
+    #         user_language_code=language_code,
+    #         text_localization=localizer.button.add_new_product,
+    #     ),
+    #     callback_data="add_new_product",
+    # )
+    # keyboard.insert(add_product_button)
+
+    # Добавляем кнопки с товарами, если они есть
+    if seller_products:
+        product_buttons = [
+            InlineKeyboardButton(
+                text=product["product_name"],
+                callback_data=f"product_{product['product_id']}",
+            )
+            for product in seller_products
+        ]
+        keyboard.add(*product_buttons)
+
+    # Кнопка "Назад в главное меню"
+    keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 
     return keyboard

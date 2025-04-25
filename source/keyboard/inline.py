@@ -116,7 +116,7 @@ async def seller_products_list_keyboard(seller_id: int, language_code: str) -> I
     ),
     ]
 
-    keyboard.add(buttons)
+    keyboard.add(*buttons)
 
     # Добавляем кнопки с товарами, если они есть
     if seller_products:

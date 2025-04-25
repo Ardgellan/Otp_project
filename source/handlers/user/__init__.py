@@ -46,6 +46,12 @@ def register_user_handlers(dp: Dispatcher):
             state=ProductInputFlow.waiting_for_product_otp
         )
 
+        dp.register_callback_query_handler(
+            show_seller_products,
+            lambda call: call.data == "my_products_button",  # кнопка должна иметь такой data
+            state="*"
+        )
+
     except Exception as e:
         logger.error(f"Error while registering user handlers: {e}")
     else:

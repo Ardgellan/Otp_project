@@ -127,19 +127,51 @@ async def add_product_to_db_and_notify(message: types.Message, state: FSMContext
         await state.finish()
 
 
+# async def show_product_info(call: types.CallbackQuery, state: FSMContext):
+#     product_id = int(callback_query.data.split("_")[1])
+#     product = await db_manager.get_product_by_id(product_id)
+
+#     if product:
+#         text = (
+#             f"🛒 <b>{product['product_name']}</b>\n"
+#             f"🆔 ID: <code>{product['product_id']}</code>\n"
+#             f"🔐 OTP: <code>{product['product_otp']}</code>\n"
+#             f"📅 Добавлено: {product['created_at'].strftime('%Y-%m-%d %H:%M')}"
+#         )
+#     else:
+#         text = "❌ Товар не найден."
+
+#     await bot.answer_callback_query(callback_query.id)
+#     await bot.send_message(callback_query.from_user.id, text, parse_mode="HTML")
+
+
 async def show_product_info(call: types.CallbackQuery, state: FSMContext):
-    product_id = int(callback_query.data.split("_")[1])
-    product = await db_manager.get_product_by_id(product_id)
+    try:
+        logger.debug(f"Received callback data: {call.data}")
 
-    if product:
-        text = (
-            f"🛒 <b>{product['product_name']}</b>\n"
-            f"🆔 ID: <code>{product['product_id']}</code>\n"
-            f"🔐 OTP: <code>{product['product_otp']}</code>\n"
-            f"📅 Добавлено: {product['created_at'].strftime('%Y-%m-%d %H:%M')}"
-        )
-    else:
-        text = "❌ Товар не найден."
+        product_id_str = call.data.split("_")[1]
+        logger.debug(f"Extracted product_id: {product_id_str}")
 
-    await bot.answer_callback_query(callback_query.id)
-    await bot.send_message(callback_query.from_user.id, text, parse_mode="HTML")
+        product_id = int(product_id_str)
+        product = await db_manager.get_product_by_id(product_id)
+
+        logger.debug(f"Product fetch result: {product}")
+
+        if product:
+            text = (
+                f"🛒 <b>{product['product_name']}</b>\n"
+                f"🆔 ID: <code>{product['product_id']}</code>\n"
+                f"🔐 OTP: <code>{product['product_otp']}</code>\n"
+                f"📅 Добавлено: {product['created_at'].strftime('%Y-%m-%d %H:%M')}"
+            )
+        else:
+            text = "❌ Товар не найден."
+            logger.warning(f"Product with ID {product_id} not found in database.")
+
+        await call.answer()
+        await call.message.answer(text, parse_mode="HTML")
+
+    except Exception as e:
+        logger.error(f"Exception in show_product_info: {e}", exc_info=True)
+        await call.answer()
+        await call.message.answer("⚠️ Произошла ошибка при получении информации о товаре.")

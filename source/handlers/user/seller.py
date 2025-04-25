@@ -31,6 +31,7 @@ async def show_seller_products(call: types.CallbackQuery, state: FSMContext):
             text_localization=localizer.message.show_seller_products_message,
         ),
         reply_markup=await inline.seller_products_list_keyboard(
+            seller_id=call.from_user.id,
             language_code=call.from_user.language_code,
         )
     )

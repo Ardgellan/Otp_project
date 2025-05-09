@@ -79,7 +79,7 @@ def register_seller_handlers(dp: Dispatcher):
 
         dp.register_callback_query_handler(
             show_subscription_payment_menu_function,
-            lambda call: call.data == "my_products_button",
+            lambda call: call.data == "subscription_button",
             state="*",
         )
 

@@ -169,7 +169,7 @@ async def confirm_delete_config_keyboard(product_id: int, language_code: str) ->
             user_language_code=language_code,
             text_localization=localizer.message.confirm_delete_button,
         ),
-        callback_data=f"delete_{product_id}"
+        callback_data=f"delete_product_{product_id}"
     )
 
     keyboard.add(*confirm_delete_button)

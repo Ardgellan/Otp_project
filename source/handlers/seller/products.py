@@ -171,10 +171,10 @@ async def show_product_info(call: types.CallbackQuery, state: FSMContext):
 
 
 async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):
-
+    logger.debug("Функция удаление подтверждение 1")
     # await call.message.delete()
     product_id = call.data.split("_")[-1]
-
+    logger.debug("Функция удаление подтверждение 2")
     await call.message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=call.from_user.language_code,
@@ -185,6 +185,7 @@ async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):
             product_id=product_id, language_code=call.from_user.language_code
         ),
     )
+    logger.debug("Функция удаление подтверждение 3")
 
 
 

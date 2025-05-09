@@ -164,15 +164,15 @@ async def specific_product_keyboard(product_id: int, language_code: str) -> Inli
 async def confirm_delete_product_keyboard(product_id: int, language_code: str) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardMarkup(row_width=1)
 
-    confirm_delete_button = InlineKeyboardButton(
+    button = InlineKeyboardButton(
         text=localizer.get_user_localized_text(
             user_language_code=language_code,
-            text_localization=localizer.message.confirm_delete_button,
+            text_localization=localizer.button.confirm_delete_button,
         ),
         callback_data=f"delete_product_{product_id}"
     )
 
-    keyboard.add(*confirm_delete_button)
+    keyboard.add(*button)
 
     keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 

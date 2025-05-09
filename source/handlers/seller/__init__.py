@@ -70,11 +70,11 @@ def register_seller_handlers(dp: Dispatcher):
             state="*",
         )
 
-        dp.register_callback_query_handler(
-            delete_product,
-            lambda call: call.data.startswith("confirm_delete_product_"),
-            state="*",
-        )
+        # dp.register_callback_query_handler(
+        #     delete_product,
+        #     lambda call: call.data.startswith("confirm_delete_product_"),
+        #     state="*",
+        # )
 
     except Exception as e:
         logger.error(f"Error while registering seller handlers: {e}")

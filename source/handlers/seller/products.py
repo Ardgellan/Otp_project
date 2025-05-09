@@ -167,7 +167,7 @@ async def show_product_info(call: types.CallbackQuery, state: FSMContext):
 
 
 
-async def edit_product_info(call: types.CallbackQuery, state: FSMContext):
+# async def edit_product_info(call: types.CallbackQuery, state: FSMContext):
 
 
 async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):

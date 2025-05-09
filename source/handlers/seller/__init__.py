@@ -6,6 +6,7 @@ from loader import dp
 from .start import *
 from .seller import *
 from .products import *
+from .pay import *
 
 def register_seller_handlers(dp: Dispatcher):
     try:
@@ -75,6 +76,14 @@ def register_seller_handlers(dp: Dispatcher):
             lambda call: call.data.startswith("delete_product_"),
             state="*",
         )
+
+        dp.register_callback_query_handler(
+            show_subscription_payment_menu_function,
+            lambda call: call.data.startswith("subscription_button"),
+            state="*",
+        )
+
+        
 
     except Exception as e:
         logger.error(f"Error while registering seller handlers: {e}")

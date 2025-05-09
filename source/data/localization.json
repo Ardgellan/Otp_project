@@ -39,6 +39,10 @@
         "product_successfully_deleted_message": {
             "en": "Product has been successfully deleted ❌",
             "ru": "Товар был успешно удален ❌ "
+        },
+        "show_subscription_payment_menu_keyboard": {
+            "en": "На сколько пополнять будешь? 💰",
+            "ru": "На сколько пополнять будешь? 💰"
         }
     },
     "button": {
@@ -58,7 +62,7 @@
             "en": "⏳ Trial Period",
             "ru": "⏳ Пробный Период"
         },
-        "pay_subscription_button": {
+        "subscription_button": {
             "en": "💲 Pay for a subscription",
             "ru": "💲 Оплатить подписку"
         },
@@ -85,6 +89,26 @@
         "confirm_delete_button": {
             "en": "🗑️ Delete",
             "ru": "🗑️ Удалить"
+        },
+        "pay_one_thousand_rubles_button": {
+            "en": "💲 One month subscription (1000 rubles)",
+            "ru": "💲 Подписка на месяц (1000 рублей)"
+        },
+        "pay_two_thousand_rubles_button": {
+            "en": "💲 Two month subscription (2000 rubles)",
+            "ru": "💲 Подписка на два месяця (2000 рублей)"
+        },
+        "pay_three_thousand_rubles_button": {
+            "en": "💲 Three month subscription (3000 rubles)",
+            "ru": "💲 Подписка на 3 месяца (3000 рублей)"
+        },
+        "pay_six_thousand_rubles_button": {
+            "en": "💲 Six month subscription (6000 rubles)",
+            "ru": "💲 Подписка на 6 месяцев (6000 рублей)"
+        },
+        "pay_twelve_thousand_rubles_button": {
+            "en": "💲 One year subscription (12000 rubles)",
+            "ru": "💲 Подписка на год (12000 рублей)"
         }
     }
 }

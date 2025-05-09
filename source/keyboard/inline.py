@@ -65,9 +65,9 @@ async def seller_keyboard(language_code: str):
         InlineKeyboardButton(
             text=localizer.get_user_localized_text(
                 user_language_code=language_code,
-                text_localization=localizer.button.pay_subscription_button,
+                text_localization=localizer.button.subscription_button,
             ),
-            callback_data="pay_subscription_button",
+            callback_data="subscription_button",
         ),
         InlineKeyboardButton(
             text=localizer.get_user_localized_text(
@@ -179,3 +179,52 @@ async def confirm_delete_product_keyboard(product_id: int, language_code: str) -
     logger.debug("Клавиатура удаление подтверждение 3")
     return keyboard
 
+
+async def show_subscription_payment_menu_keyboard(language_code: str):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    buttons = [
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.pay_one_thousand_rubles_button,
+            ),
+            callback_data="pay_1000_rubles",
+        ),
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.pay_two_thousand_rubles_button,
+            ),
+            callback_data="pay_2000_rubles",
+        ),
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.pay_three_thousand_rubles_button,
+            ),
+            callback_data="pay_3000_rubles",
+        ),
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.pay_six_thousand_rubles_button,
+            ),
+            callback_data="pay_6000_rubles",
+        ),
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.pay_twelve_thousand_rubles_button,
+            ),
+            callback_data="pay_12000_rubles",
+        ),
+    ]
+
+    for button in buttons:
+        keyboard.insert(button)
+
+    keyboard = await insert_button_back_to_main_menu(
+        keyboard=keyboard,
+        language_code=language_code,
+    )
+    return keyboard

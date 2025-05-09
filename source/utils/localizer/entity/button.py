@@ -27,8 +27,8 @@ class LocalizedButtonText(BaseLocalizedObject):
         return self._get_entity_text("trial_period_button")
 
     @property
-    def pay_subscription_button(self) -> LocalizedText:
-        return self._get_entity_text("pay_subscription_button")
+    def subscription_button(self) -> LocalizedText:
+        return self._get_entity_text("subscription_button")
 
     @property
     def status_subscription_button(self) -> LocalizedText:
@@ -53,6 +53,26 @@ class LocalizedButtonText(BaseLocalizedObject):
     @property
     def confirm_delete_button(self) -> LocalizedText:
         return self._get_entity_text("confirm_delete_button")
+
+    @property
+    def pay_one_thousand_rubles_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_one_thousand_rubles_button")
+
+    @property
+    def pay_two_thousand_rubles_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_two_thousand_rubles_button")
+
+    @property
+    def pay_three_thousand_rubles_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_three_thousand_rubles_button")
+
+    @property
+    def pay_six_thousand_rubles_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_six_thousand_rubles_button")
+
+    @property
+    def pay_twelve_thousand_rubles_button(self) -> LocalizedText:
+        return self._get_entity_text("pay_twelve_thousand_rubles_button")
 
 
 

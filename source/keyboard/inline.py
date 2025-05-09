@@ -150,7 +150,7 @@ async def specific_product_keyboard(product_id: int, language_code: str) -> Inli
                 user_language_code=language_code,
                 text_localization=localizer.button.delete_product_button,
             ),
-            callback_data=f"delete_product_{product_id}",
+            callback_data=f"confirm_delete_product_{product_id}",
         ),
     ]
 

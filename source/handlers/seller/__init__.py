@@ -66,7 +66,7 @@ def register_seller_handlers(dp: Dispatcher):
 
         dp.register_callback_query_handler(
             confirm_delete_product,
-            lambda call: call.data.startswith("delete_product_"),
+            lambda call: call.data.startswith("confirm_delete_product_"),
             state="*",
         )
 

@@ -127,24 +127,6 @@ async def add_product_to_db_and_notify(message: types.Message, state: FSMContext
         await state.finish()
 
 
-# async def show_product_info(call: types.CallbackQuery, state: FSMContext):
-#     product_id = int(callback_query.data.split("_")[1])
-#     product = await db_manager.get_product_by_id(product_id)
-
-#     if product:
-#         text = (
-#             f"🛒 <b>{product['product_name']}</b>\n"
-#             f"🆔 ID: <code>{product['product_id']}</code>\n"
-#             f"🔐 OTP: <code>{product['product_otp']}</code>\n"
-#             f"📅 Добавлено: {product['created_at'].strftime('%Y-%m-%d %H:%M')}"
-#         )
-#     else:
-#         text = "❌ Товар не найден."
-
-#     await bot.answer_callback_query(callback_query.id)
-#     await bot.send_message(callback_query.from_user.id, text, parse_mode="HTML")
-
-
 async def show_product_info(call: types.CallbackQuery, state: FSMContext):
     try:
         logger.debug(f"Received callback data: {call.data}")
@@ -182,3 +164,58 @@ async def show_product_info(call: types.CallbackQuery, state: FSMContext):
         logger.error(f"Exception in show_product_info: {e}", exc_info=True)
         await call.answer()
         await call.message.answer("⚠️ Произошла ошибка при получении информации о товаре.")
+
+
+
+async def edit_product_info(call: types.CallbackQuery, state: FSMContext):
+
+
+async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):
+
+    await call.message.delete()
+    product_id = call.data.split("_")[-1]
+
+    await call.message.answer(
+        text=localizer.get_user_localized_text(
+            user_language_code=call.from_user.language_code,
+            text_localization=localizer.message.confirm_delete_product_message,
+        ),
+        parse_mode=types.ParseMode.HTML,
+        reply_markup=await inline.confirm_delete_config_keyboard(
+            product_id=product_id, language_code=call.from_user.language_code
+        ),
+    )
+
+
+
+async def delete_product(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("Начинается процесс удаления товара.")
+
+    try:
+        # Получаем ID товара из callback_data (например, "delete_12345")
+        product_id = call.data.split("_")[1]
+
+        # Удаляем товар (предполагается, что есть метод delete_product_by_id)
+        await db_manager.delete_product_by_id(
+            seller_id=call.from_user.id,
+            product_id=product_id
+        )
+        logger.info(f"Товар с ID {product_id} успешно удалён.")
+
+        # Уведомляем пользователя
+        await call.message.edit_text(
+            text=localizer.get_user_localized_text(
+                user_language_code=call.from_user.language_code,
+                text_localization=localizer.message.product_successfully_deleted_message,
+            ),
+            parse_mode=types.ParseMode.HTML,
+        )
+        await call.answer()
+
+    except Exception as e:
+        logger.error(f"Ошибка при удалении товара: {e}")
+        await call.message.answer(
+            text="Произошла ошибка при удалении товара. Попробуйте позже.",
+            parse_mode=types.ParseMode.HTML,
+        )
+        await call.answer()

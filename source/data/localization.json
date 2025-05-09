@@ -31,6 +31,10 @@
         "show_seller_products_message": {
             "en": "This is the list of your products 📃",
             "ru": "Это список ваших товаров 📃"
+        },
+        "confirm_delete_product_message": {
+            "en": "Are you sure you want to delete the product? 🗑️",
+            "ru": "Вы уверены что хотите удалить товар? 🗑️"
         }
     },
     "button": {
@@ -73,6 +77,10 @@
         "delete_product_button": {
             "en": "📇 Delete product",
             "ru": "📇 Удалить товар"
+        },
+        "confirm_delete_button": {
+            "en": "🗑️ Delete",
+            "ru": "🗑️ Удалить"
         }
     }
 }

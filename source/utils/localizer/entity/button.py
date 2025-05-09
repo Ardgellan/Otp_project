@@ -50,5 +50,9 @@ class LocalizedButtonText(BaseLocalizedObject):
     def delete_product_button(self) -> LocalizedText:
         return self._get_entity_text("delete_product_button")
 
+    @property
+    def confirm_delete_button(self) -> LocalizedText:
+        return self._get_entity_text("confirm_delete_button")
+
 
 

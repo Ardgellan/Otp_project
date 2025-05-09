@@ -20,7 +20,7 @@ Configuration.secret_key = "test_iQvI0ynCTlfEwvT9qCOGE7R0n2lOylUvq_GsCezwZes"
 
 
 async def show_subscription_payment_menu_function(call: types.CallbackQuery, state: FSMContext):
-    # logger.info(f"Пользователь {call.from_user.id} открыл меню пополнения баланса")
+    logger.info(f"Пользователь {call.from_user.id} открыл меню пополнения баланса")
     await state.finish()
     await call.message.edit_text(
         text=localizer.get_user_localized_text(

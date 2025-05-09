@@ -161,7 +161,7 @@ async def specific_product_keyboard(product_id: int, language_code: str) -> Inli
     return keyboard
 
 
-async def confirm_delete_config_keyboard(product_id: int, language_code: str) -> InlineKeyboardMarkup:
+async def confirm_delete_product_keyboard(product_id: int, language_code: str) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardMarkup(row_width=1)
 
     confirm_delete_button = InlineKeyboardButton(

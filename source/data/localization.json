@@ -40,7 +40,7 @@
             "en": "Product has been successfully deleted ❌",
             "ru": "Товар был успешно удален ❌ "
         },
-        "show_subscription_payment_menu_keyboard": {
+        "show_subscription_payment_message": {
             "en": "На сколько пополнять будешь? 💰",
             "ru": "На сколько пополнять будешь? 💰"
         }

@@ -46,4 +46,8 @@ class LocalizedMessageText(BaseLocalizedObject):
     def confirm_delete_product_message(self) -> LocalizedText:
         return self._get_entity_text("confirm_delete_product_message")
 
+    @property
+    def product_successfully_deleted_message(self) -> LocalizedText:
+        return self._get_entity_text("product_successfully_deleted_message")
+
 

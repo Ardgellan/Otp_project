@@ -178,3 +178,4 @@ async def confirm_delete_product_keyboard(product_id: int, language_code: str) -
     keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
     logger.debug("Клавиатура удаление подтверждение 3")
     return keyboard
+

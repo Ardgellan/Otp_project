@@ -23,6 +23,7 @@ class Deleter(DatabaseConnector):
         """
         await self._execute_query(query)
         logger.debug(f"Buyer {buyer_id} was deleted")
+
     
     async def delete_product_by_id(self, seller_id: int, product_id: int) -> None:
         query = f"""--sql

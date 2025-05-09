@@ -206,11 +206,11 @@ async def delete_product(call: types.CallbackQuery, state: FSMContext):
         # Уведомляем пользователя
         await call.message.edit_text(
             text=localizer.get_user_localized_text(
-                user_language_code=call.from_user.language_code,
+                language_code=call.from_user.language_code,
                 text_localization=localizer.message.product_successfully_deleted_message,
             ),
             parse_mode=types.ParseMode.HTML,
-            reply_markup=await inline.insert_button_back_to_main_menu(language_code=language_code)
+            reply_markup=await inline.insert_button_back_to_main_menu(language_code=call.from_user.language_code)
         )
         await call.answer()
 

@@ -83,8 +83,12 @@ def register_seller_handlers(dp: Dispatcher):
             state="*",
         )
 
+        dp.register_callback_query_handler(
+            handle_payment,
+            lambda call: call.data.startswith("pay_"),
+            state="*",
+        )
         
-
     except Exception as e:
         logger.error(f"Error while registering seller handlers: {e}")
     else:

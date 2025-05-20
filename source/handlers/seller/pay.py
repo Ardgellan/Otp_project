@@ -36,7 +36,7 @@ async def show_subscription_payment_menu_function(call: types.CallbackQuery, sta
 
 async def handle_payment(call: types.CallbackQuery):
     # Получаем сумму из callback_data
-    logger.debug(f"Начали обработку платежа")
+    logger.debug(f"Начали обработку платеж_1")
     amount_mapping = {
         "pay_1000_rubles": 1000,
         "pay_2000_rubles": 2000,
@@ -45,12 +45,12 @@ async def handle_payment(call: types.CallbackQuery):
         "pay_12000_rubles": 12000,
     }
     amount = amount_mapping.get(call.data)  # Получаем сумму по нажатой кнопке
-
+    logger.debug(f"Начали обработку платеж_2")
     if amount is not None:
 
         # Создаем платеж с соответствующей суммой
         payment_url, payment_id = await create_payment(amount, call.from_user.id)
-
+        logger.debug(f"Начали обработку платеж_3")
         if payment_url:
             await call.message.answer(
                 text=localizer.get_user_localized_text(
@@ -62,7 +62,7 @@ async def handle_payment(call: types.CallbackQuery):
                     language_code=call.from_user.language_code, payment_url=payment_url
                 ),
             )
-
+            logger.debug(f"Начали обработку платеж_4")
             # Запуск проверки статуса платежа
             payment_success = await check_payment_status(payment_id, call.from_user.id, amount)
             if payment_success:
@@ -72,7 +72,9 @@ async def handle_payment(call: types.CallbackQuery):
                 await call.message.answer(
                     text="Подписка оплачена!"
                 )
+                logger.debug(f"Начали обработку платеж_5")
         else:
+            logger.debug(f"Начали обработку платеж_5.1")
             await call.message.answer(
                 text=localizer.get_user_localized_text(
                     user_language_code=call.from_user.language_code,
@@ -85,7 +87,7 @@ async def handle_payment(call: types.CallbackQuery):
             )
     else:
         await call.message.answer("Неизвестная сумма. Пожалуйста, попробуйте снова.")
-
+    logger.debug(f"Начали обработку платеж_6")
     await call.answer()  # Подтверждаем обработку коллбека
 
 

@@ -36,7 +36,7 @@ async def show_subscription_payment_menu_function(call: types.CallbackQuery, sta
 
 async def handle_payment(call: types.CallbackQuery):
     # Получаем сумму из callback_data
-    logger.debbug(f"Начали обработку платежа")
+    logger.debug(f"Начали обработку платежа")
     amount_mapping = {
         "pay_1000_rubles": 1000,
         "pay_2000_rubles": 2000,

@@ -74,5 +74,9 @@ class LocalizedButtonText(BaseLocalizedObject):
     def pay_twelve_thousand_rubles_button(self) -> LocalizedText:
         return self._get_entity_text("pay_twelve_thousand_rubles_button")
 
+    @property
+    def confirm_payment_button(self) -> LocalizedText:
+        return self._get_entity_text("confirm_payment_button")
+
 
 

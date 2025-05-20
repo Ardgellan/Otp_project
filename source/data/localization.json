@@ -43,6 +43,10 @@
         "show_subscription_payment_message": {
             "en": "На сколько пополнять будешь? 💰",
             "ru": "На сколько пополнять будешь? 💰"
+        },
+        "payment_confirmation_message": {
+            "en": "Press Pay 💰 to pay",
+            "ru": "Нажмите Оплатить 💰 чтобы оплатить"
         }
     },
     "button": {
@@ -109,6 +113,10 @@
         "pay_twelve_thousand_rubles_button": {
             "en": "💲 One year subscription (12000 rubles)",
             "ru": "💲 Подписка на год (12000 рублей)"
+        },
+        "confirm_payment_button": {
+            "en": "Pay 💰",
+            "ru": "Оплатить 💰"
         }
     }
 }

@@ -69,14 +69,7 @@ async def handle_payment(call: types.CallbackQuery):
                 # current_subscription_status = await db_manager.get_subscription_status(call.from_user.id)
                 # current_subscription_status = '🟢' if await db_manager.get_subscription_status(call.from_user.id) else '🔴'
                 await call.message.answer(
-                    text=localizer.get_user_localized_text(
-                        user_language_code=call.from_user.language_code,
-                        text_localization=localizer.message.successfull_payment_message,
-                    ).format(amount=amount, current_balance=current_balance),
-                    parse_mode=types.ParseMode.HTML,
-                    reply_markup=await inline.successfull_payment_keyboard(
-                        language_code=call.from_user.language_code
-                    ),
+                    text="Подписка оплачена!"
                 )
         else:
             await call.message.answer(
@@ -100,10 +93,10 @@ async def create_payment(amount, chat_id):
     payment = Payment.create(
         {
             "amount": {"value": amount, "currency": "RUB"},
-            "confirmation": {"type": "redirect", "return_url": "https://t.me/VPNizatorBot"},
+            "confirmation": {"type": "redirect", "return_url": "https://t.me/K1aramsolt_bot"},
             "capture": True,
             "metadata": {"chat_id": chat_id},
-            "description": "Пополнение баланса VPNizator",
+            "description": "Пополнение баланса OTP_project",
             "receipt": {
                 "customer": {"email": "user@example.com"},  # Или номер телефона, если нет email
                 "items": [

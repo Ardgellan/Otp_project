@@ -237,7 +237,7 @@ async def payment_confirmation_keyboard(language_code: str, payment_url: str):
     pay_button = InlineKeyboardButton(
         text=localizer.get_user_localized_text(
             user_language_code=language_code,
-            text_localization=localizer.button.pay_button,  # Замените на вашу локализацию
+            text_localization=localizer.button.confirm_payment_button,  # Замените на вашу локализацию
         ),
         url=payment_url,  # URL для перехода на сайт платежной системы
     )
@@ -251,3 +251,5 @@ async def payment_confirmation_keyboard(language_code: str, payment_url: str):
     )
 
     return keyboard
+
+

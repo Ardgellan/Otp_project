@@ -90,6 +90,7 @@ class Creator(DatabaseConnector):
             CREATE TABLE sellers (
                 seller_id BIGINT PRIMARY KEY NOT NULL,
                 subscription_is_active BOOLEAN NOT NULL DEFAULT FALSE,
+                subscription_until TIMESTAMP NOT NULL DEFAULT TO_TIMESTAMP(0),
                 last_subscription_payment TIMESTAMP NOT NULL DEFAULT TO_TIMESTAMP(0),
                 created_at TIMESTAMP NOT NULL DEFAULT NOW()
             );

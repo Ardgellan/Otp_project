@@ -37,19 +37,19 @@ async def show_subscription_payment_menu_function(call: types.CallbackQuery, sta
 async def handle_payment(call: types.CallbackQuery):
     # Получаем сумму из callback_data
     logger.debug(f"Начали обработку платеж_1")
-    amount_mapping = {
-        "pay_1000_rubles": 1000,
-        "pay_2000_rubles": 2000,
-        "pay_3000_rubles": 3000,
-        "pay_6000_rubles": 6000,
-        "pay_12000_rubles": 12000,
+    months_mapping = {
+        "pay_1000_rubles": 1,
+        "pay_2000_rubles": 2,
+        "pay_3000_rubles": 3,
+        "pay_6000_rubles": 6,
+        "pay_12000_rubles": 12,
     }
-    amount = amount_mapping.get(call.data)  # Получаем сумму по нажатой кнопке
+    months = months_mapping.get(call.data)  # Получаем сумму по нажатой кнопке
     logger.debug(f"Начали обработку платеж_2")
-    if amount is not None:
+    if months is not None:
 
         # Создаем платеж с соответствующей суммой
-        payment_url, payment_id = await create_payment(amount, call.from_user.id)
+        payment_url, payment_id = await create_payment(amount=months * 1000, chat_id=call.from_user.id)
         logger.debug(f"Начали обработку платеж_3")
         if payment_url:
             await call.message.answer(
@@ -64,11 +64,8 @@ async def handle_payment(call: types.CallbackQuery):
             )
             logger.debug(f"Начали обработку платеж_4")
             # Запуск проверки статуса платежа
-            payment_success = await check_payment_status(payment_id, call.from_user.id, amount)
+            payment_success = await check_payment_status(payment_id, call.from_user.id, months)
             if payment_success:
-                current_balance = await db_manager.get_user_balance(call.from_user.id)
-                # current_subscription_status = await db_manager.get_subscription_status(call.from_user.id)
-                # current_subscription_status = '🟢' if await db_manager.get_subscription_status(call.from_user.id) else '🔴'
                 await call.message.answer(
                     text="Подписка оплачена!"
                 )
@@ -76,14 +73,7 @@ async def handle_payment(call: types.CallbackQuery):
         else:
             logger.debug(f"Начали обработку платеж_5.1")
             await call.message.answer(
-                text=localizer.get_user_localized_text(
-                    user_language_code=call.from_user.language_code,
-                    text_localization=localizer.message.payment_assembly_error_message,
-                ),
-                parse_mode=types.ParseMode.HTML,
-                reply_markup=await inline.insert_button_back_to_main_menu(
-                    language_code=call.from_user.language_code
-                ),
+                text="Ошибка при оплате подписки!"
             )
     else:
         await call.message.answer("Неизвестная сумма. Пожалуйста, попробуйте снова.")
@@ -99,7 +89,7 @@ async def create_payment(amount, chat_id):
             "confirmation": {"type": "redirect", "return_url": "https://t.me/K1aramsolt_bot"},
             "capture": True,
             "metadata": {"chat_id": chat_id},
-            "description": "Пополнение баланса OTP_project",
+            "description": "Оплата подписки OTP_project",
             "receipt": {
                 "customer": {"email": "user@example.com"},  # Или номер телефона, если нет email
                 "items": [
@@ -117,7 +107,7 @@ async def create_payment(amount, chat_id):
     return payment.confirmation.confirmation_url, payment.id
 
 
-async def check_payment_status(payment_id, chat_id, amount):
+async def check_payment_status(payment_id, chat_id, months):
     payment = json.loads((Payment.find_one(payment_id)).json())
 
     while payment["status"] == "pending":
@@ -135,15 +125,15 @@ async def check_payment_status(payment_id, chat_id, amount):
             try:
                 # Используем транзакцию для обновления баланса
                 async with db_manager.transaction() as conn:
-                    await db_manager.update_user_balance(chat_id, amount, conn=conn)
+                    await db_manager.extend_user_subscription(chat_id, months, conn=conn)
                 logger.info(
-                    f"Баланс пользователя {chat_id} был успешно обновлен на {amount} рублей (попытка {attempt + 1})."
+                    f"Подписка пользователя {chat_id} была успешно продлена на {months} месяцев (попытка {attempt + 1})."
                 )
                 success = True
                 break  # Если обновление прошло успешно, выходим из цикла
             except Exception as e:
                 logger.error(
-                    f"Ошибка при обновлении баланса пользователя {chat_id} (попытка {attempt + 1}): {str(e)}"
+                    f"Ошибка при продлении подписки пользователя {chat_id} (попытка {attempt + 1}): {str(e)}"
                 )
                 await asyncio.sleep(2)  # Ожидание между попытками
 

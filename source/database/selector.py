@@ -62,3 +62,32 @@ class Selector(DatabaseConnector):
             }
         return None
 
+
+    async def is_subscription_active(self, seller_id: int) -> bool:
+        query = f"""
+            SELECT subscription_is_active
+            FROM sellers
+            WHERE seller_id = {seller_id};
+        """
+        result = await self._execute_query(query)
+        if result:
+            return result[0][0]  # True или False из базы
+        return False  # Если записи нет — подписки тоже нет
+
+
+    async def get_subscription_info(self, seller_id: int) -> dict | None:
+        query = """
+            SELECT last_subscription_payment, subscription_until
+            FROM sellers
+            WHERE seller_id = $1;
+        """
+        result = await self._execute_query(query, seller_id)
+        if result:
+            row = result[0]
+            return {
+                "last_subscription_payment": row[0],
+                "subscription_until": row[1],
+            }
+        return None
+
+

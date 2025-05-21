@@ -58,4 +58,8 @@ class LocalizedMessageText(BaseLocalizedObject):
     def payment_confirmation_message(self) -> LocalizedText:
         return self._get_entity_text("payment_confirmation_message")
 
+    @property
+    def subscription_status_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_status_message")
+
 

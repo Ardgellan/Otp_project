@@ -7,6 +7,7 @@ from .start import *
 from .seller import *
 from .products import *
 from .pay import *
+from .subscription import *
 
 def register_seller_handlers(dp: Dispatcher):
     try:
@@ -86,6 +87,12 @@ def register_seller_handlers(dp: Dispatcher):
         dp.register_callback_query_handler(
             handle_payment,
             lambda call: call.data.startswith("pay_"),
+            state="*",
+        )
+
+        dp.register_callback_query_handler(
+            subscription_status,
+            lambda call: call.data == "status_subscription_button",
             state="*",
         )
         

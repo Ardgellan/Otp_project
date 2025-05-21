@@ -51,6 +51,10 @@
         "subscription_status_message": {
             "en": "Subscription status: <b>{sub_status}</b>\n\nLast Subscription Payment: <b>{last_sub_payment}</b>\n\nSubscription Ends: <b>{sub_expiration}</b>",
             "ru": "Статус подписки: <b>{sub_status}</b>\n\nПоследний платеж по подписке: <b>{last_sub_payment}</b>\n\nПодписка истекает: <b>{sub_expiration}</b>"
+        },
+        "subscription_required_message": {
+            "en": "Subscription payment is required 💲",
+            "ru": "Необходимо оплатить подписку 💲"
         }
     },
     "button": {

@@ -5,9 +5,11 @@ from loguru import logger
 from source.utils import localizer
 from source.keyboard import inline
 from loader import db_manager
+from .subscription import check_subscription_active
 
 from source.utils.states.seller_states import ProductInputFlow
 
+@check_subscription_active()
 async def request_user_for_product_name(call: types.CallbackQuery, state: FSMContext):
     logger.debug("Salam_1")
     await call.message.answer(
@@ -166,10 +168,6 @@ async def show_product_info(call: types.CallbackQuery, state: FSMContext):
         await call.message.answer("⚠️ Произошла ошибка при получении информации о товаре.")
 
 
-
-# async def edit_product_info(call: types.CallbackQuery, state: FSMContext):
-
-
 async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):
     logger.debug("Функция удаление подтверждение 1")
     # await call.message.delete()
@@ -186,41 +184,6 @@ async def confirm_delete_product(call: types.CallbackQuery, state: FSMContext):
         ),
     )
     logger.debug("Функция удаление подтверждение 3")
-
-
-
-# async def delete_product(call: types.CallbackQuery, state: FSMContext):
-#     logger.debug("Начинается процесс удаления товара.")
-
-#     try:
-#         # Получаем ID товара из callback_data (например, "delete_12345")
-#         product_id = call.data.split("_")[1]
-
-#         # Удаляем товар (предполагается, что есть метод delete_product_by_id)
-#         await db_manager.delete_product_by_id(
-#             seller_id=call.from_user.id,
-#             product_id=product_id
-#         )
-#         logger.info(f"Товар с ID {product_id} успешно удалён.")
-
-#         # Уведомляем пользователя
-#         await call.message.edit_text(
-#             text=localizer.get_user_localized_text(
-#                 language_code=call.from_user.language_code,
-#                 text_localization=localizer.message.product_successfully_deleted_message,
-#             ),
-#             parse_mode=types.ParseMode.HTML,
-#             reply_markup=await inline.insert_button_back_to_main_menu(language_code=call.from_user.language_code)
-#         )
-#         await call.answer()
-
-#     except Exception as e:
-#         logger.error(f"Ошибка при удалении товара: {e}")
-#         await call.message.answer(
-#             text="Произошла ошибка при удалении товара. Попробуйте позже.",
-#             parse_mode=types.ParseMode.HTML,
-#         )
-#         await call.answer()
 
 
 async def delete_product(call: types.CallbackQuery, state: FSMContext):

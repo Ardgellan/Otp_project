@@ -1,28 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from loguru import logger
+from functools import wraps 
 
 from source.utils import localizer
 from source.keyboard import inline
 from loader import db_manager
-
-
-# async def subscription_status(call: types.CallbackQuery, state: FSMContext):
-    
-#     subscription_is_active = '🟢' if await db_manager.is_subscription_active(call.from_user.id) else '🔴'
-
-
-#     await call.message.answer(
-#         text=localizer.get_user_localized_text(
-#             user_language_code=call.from_user.language_code,
-#             text_localization=localizer.message.subscription_status_message,
-#         ).format(
-#             parse_mode=types.ParseMode.HTML,
-#         )
-#         reply_markup=await inline.insert_backinsert_button_back_to_main_menu(
-#             language_code=call.from_user.language_code,
-#         )
-#     )
 
 
 async def subscription_status(call: types.CallbackQuery, state: FSMContext):
@@ -58,3 +41,26 @@ async def subscription_status(call: types.CallbackQuery, state: FSMContext):
         reply_markup=await inline.insert_button_back_to_main_menu(language_code=lang),
         parse_mode=types.ParseMode.HTML,
     )
+
+
+def check_subscription_active():
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(call: types.CallbackQuery, *args, **kwargs):
+
+            is_active = await db_manager.is_subscription_active(call.from_user.id)
+            if not is_active:
+                await call.message.answer(
+                    text=localizer.get_user_localized_text(
+                    user_language_code=call.from_user.language_code,
+                    text_localization=localizer.message.subscription_required_message,
+                ),
+                    reply_markup=await inline.insert_button_back_to_main_menu(language_code=call.from_user.language_code),
+                    parse_mode=types.ParseMode.HTML,
+                )
+                return  # ⛔ Прекращаем выполнение целевой функции
+
+            return await func(call, *args, **kwargs)
+
+        return wrapper
+    return decorator

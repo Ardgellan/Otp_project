@@ -62,4 +62,9 @@ class LocalizedMessageText(BaseLocalizedObject):
     def subscription_status_message(self) -> LocalizedText:
         return self._get_entity_text("subscription_status_message")
 
+    @property
+    def subscription_required_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_required_message")
+
+
 

@@ -12,7 +12,7 @@ async def trial_period_func(call: types.CallbackQuerry, state: FSMContext):
 
     if not sub_is_active:
         await call.message.answer(
-            text=localizer.message.get_user_localized_text(
+            text=localizer.get_user_localized_text(
                 user_language_code=call.from_user.language_code,
                 text_localization=localizer.message.trial_period_message
             ).fromat(

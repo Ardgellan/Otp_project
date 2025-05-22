@@ -265,7 +265,7 @@ async def trial_period_keyboard(language_code: str):
     )
 
     # Добавляем кнопки на клавиатуру
-    keyboard.add(pay_button)
+    keyboard.add(confirm_trial_button)
 
     keyboard = await insert_button_back_to_main_menu(
         keyboard=keyboard,

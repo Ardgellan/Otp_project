@@ -20,7 +20,7 @@ async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
                 ),
                 parse_mode=types.ParseMode.HTML,
                 reply_markup=await inline.trial_period_keyboard(
-                    user_language_code=call.from_user.language_code
+                    language_code=call.from_user.language_code
                 )
             )
         else:
@@ -31,7 +31,7 @@ async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
                 ),
                 parse_mode=types.ParseMode.HTML,
                 reply_markup=await inline.insert_button_back_to_main_menu(
-                    user_language_code=call.from_user.language_code
+                    language_code=call.from_user.language_code
                 )
             )
     except Exception as e:

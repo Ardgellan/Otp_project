@@ -7,7 +7,7 @@ from source.keyboard import inline
 from loader import db_manager
 
 
-async def trial_period_func(call: types.CallbackQuerry, state: FSMContext):
+async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
     sub_is_active = await db_manager.is_subscription_active(call.from_user.id)
 
     if not sub_is_active:
@@ -15,9 +15,8 @@ async def trial_period_func(call: types.CallbackQuerry, state: FSMContext):
             text=localizer.get_user_localized_text(
                 user_language_code=call.from_user.language_code,
                 text_localization=localizer.message.trial_period_message
-            ).fromat(
-                parse_mode=types.ParseMode.HTML
-            )
+            ),
+            parse_mode=types.ParseMode.HTML,
             reply_markup=await inline.trial_period_keyboard(
                 user_language_code=call.from_user.language_code
             )
@@ -27,9 +26,8 @@ async def trial_period_func(call: types.CallbackQuerry, state: FSMContext):
             text=localizer.get_user_localized_text(
                 user_language_code=call.from_user.language_code,
                 text_localization=localizer.message.trial_period_refusal_message
-            ).fromat(
-                parse_mode=types.ParseMode.HTML
-            )
+            ),
+            parse_mode=types.ParseMode.HTML,
             reply_markup=await inline.insert_button_back_to_main_menu(
                 user_language_code=call.from_user.language_code
             )
@@ -38,17 +36,16 @@ async def trial_period_func(call: types.CallbackQuerry, state: FSMContext):
     await call.answer()
 
 
-async def trial_period_activation_func(call: types.CallbackQuerry, state: FSMContext):
+async def trial_period_activation_func(call: types.CallbackQuery, state: FSMContext):
     
-    await db_manager.extend_user_subscription(seller_id=call.from_user.id, months=1, conn=conn)
+    await db_manager.extend_user_subscription(seller_id=call.from_user.id, months=1)
 
     await call.message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=call.from_user.language_code,
             text_localization=localizer.message.trial_period_activated_message
-        ).fromat(
-            parse_mode=types.ParseMode.HTML
-        )
+        ),
+        parse_mode=types.ParseMode.HTML,
         reply_markup=await inline.insert_button_back_to_main_menu(
             user_language_code=call.from_user.language_code
         )

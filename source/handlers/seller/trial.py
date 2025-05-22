@@ -51,7 +51,7 @@ async def trial_period_activation_func(call: types.CallbackQuery, state: FSMCont
         ),
         parse_mode=types.ParseMode.HTML,
         reply_markup=await inline.insert_button_back_to_main_menu(
-            user_language_code=call.from_user.language_code
+            language_code=call.from_user.language_code
         )
     )
     

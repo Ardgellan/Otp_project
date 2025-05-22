@@ -55,6 +55,18 @@
         "subscription_required_message": {
             "en": "Subscription payment is required 💲",
             "ru": "Необходимо оплатить подписку 💲"
+        },
+        "trial_period_message": {
+            "en": "Want to activate your trial period? ⏳",
+            "ru": "Хотите активировать пробный период? ⏳"
+        },
+        "trial_period_refusal_message": {
+            "en": "The trial period has already been activated! ❌",
+            "ru": "Пробный период уже был активирован! ❌"
+        },
+        "trial_period_activated_message": {
+            "en": "Trial period has been successfully activated ⏳",
+            "ru": "Пробный период был успешно активирован ⏳"
         }
     },
     "button": {
@@ -125,6 +137,10 @@
         "confirm_payment_button": {
             "en": "Pay 💰",
             "ru": "Оплатить 💰"
+        },
+        "confirm_trial_button": {
+            "en": "Confirm trial activation ⏳",
+            "ru": "Активировать пробный период ⏳"
         }
     }
 }

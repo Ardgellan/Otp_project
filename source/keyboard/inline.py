@@ -253,3 +253,25 @@ async def payment_confirmation_keyboard(language_code: str, payment_url: str):
     return keyboard
 
 
+async def trial_period_keyboard(language_code: str):
+    keyboard = InlineKeyboardMarkup(row_width=1)  # Одна кнопка в ряду
+
+    confirm_trial_button = InlineKeyboardButton(
+        text=localizer.get_user_localized_text(
+            user_language_code=language_code,
+            text_localization=localizer.button.confirm_trial_button,  # Замените на вашу локализацию
+        ),
+        callback_data="confirm_trial_button", 
+    )
+
+    # Добавляем кнопки на клавиатуру
+    keyboard.add(pay_button)
+
+    keyboard = await insert_button_back_to_main_menu(
+        keyboard=keyboard,
+        language_code=language_code,
+    )
+
+    return keyboard
+
+

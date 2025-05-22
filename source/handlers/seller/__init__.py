@@ -8,6 +8,7 @@ from .seller import *
 from .products import *
 from .pay import *
 from .subscription import *
+from .trial import *
 
 def register_seller_handlers(dp: Dispatcher):
     try:
@@ -93,6 +94,18 @@ def register_seller_handlers(dp: Dispatcher):
         dp.register_callback_query_handler(
             subscription_status,
             lambda call: call.data == "status_subscription_button",
+            state="*",
+        )
+
+        dp.register_callback_query_handler(
+            trial_period_func,
+            lambda call: call.data == "trial_period_button",
+            state="*",
+        )
+
+        dp.register_callback_query_handler(
+            trial_period_activation_func,
+            lambda call: call.data == "confirm_trial_button",
             state="*",
         )
         

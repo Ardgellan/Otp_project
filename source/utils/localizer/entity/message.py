@@ -66,5 +66,17 @@ class LocalizedMessageText(BaseLocalizedObject):
     def subscription_required_message(self) -> LocalizedText:
         return self._get_entity_text("subscription_required_message")
 
+    @property
+    def trial_period_message(self) -> LocalizedText:
+        return self._get_entity_text("trial_period_message")
+
+    @property
+    def trial_period_refusal_message(self) -> LocalizedText:
+        return self._get_entity_text("trial_period_refusal_message")
+
+    @property
+    def trial_period_activated_message(self) -> LocalizedText:
+        return self._get_entity_text("trial_period_activated_message")
+
 
 

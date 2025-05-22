@@ -8,8 +8,9 @@ from loader import db_manager
 
 
 async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
+    logger.debug("TRIAL_1")
     sub_is_active = await db_manager.is_subscription_active(call.from_user.id)
-
+    logger.debug("TRIAL_2")
     if not sub_is_active:
         await call.message.answer(
             text=localizer.get_user_localized_text(

@@ -20,7 +20,6 @@ async def request_user_for_product_name(call: types.CallbackQuery, state: FSMCon
         parse_mode=types.ParseMode.HTML,
     )
     await ProductInputFlow.waiting_for_product_name.set()
-    await call.answer()
 
 
 # Обработчик для ввода имени товара
@@ -65,7 +64,6 @@ async def request_user_for_product_id(message: types.Message, state: FSMContext)
     )
     logger.debug("Balam_3")
     await ProductInputFlow.waiting_for_product_id.set()
-    await call.answer()
 
 
 # # Обработчик для ввода ID товара
@@ -87,6 +85,7 @@ async def handle_product_id(message: types.Message, state: FSMContext):
     # Проверка: число
     if not product_id_text.isdigit():
         await message.answer("❌ ID товара должен быть числом. Пожалуйста, введите корректный ID.")
+        await ProductInputFlow.waiting_for_product_id.set()
         return
 
     product_id = int(product_id_text)
@@ -94,6 +93,7 @@ async def handle_product_id(message: types.Message, state: FSMContext):
     # Проверка: диапазон
     if product_id <= 0 or product_id > 999999999999:
         await message.answer("❌ Неверный диапазон ID товара. Попробуйте другое значение.")
+        await ProductInputFlow.waiting_for_product_id.set()
         return
 
     await state.update_data(product_id=product_id)
@@ -110,7 +110,6 @@ async def request_user_for_product_otp(message: types.Message, state: FSMContext
         parse_mode=types.ParseMode.HTML,
     )
     await ProductInputFlow.waiting_for_product_otp.set()
-    await call.answer()
 
 
 # # Обработчик для ввода OTP товара
@@ -131,10 +130,12 @@ async def handle_product_otp(message: types.Message, state: FSMContext):
 
     if not product_otp:
         await message.answer("❌ OTP не может быть пустым.")
+        await ProductInputFlow.waiting_for_product_otp.set()
         return
 
     if len(product_otp) > 50:
         await message.answer("❌ OTP слишком длинный. Максимум 50 символов.")
+        await ProductInputFlow.waiting_for_product_otp.set()
         return
 
     await state.update_data(product_otp=product_otp)

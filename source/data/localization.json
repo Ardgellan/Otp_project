@@ -67,6 +67,30 @@
         "trial_period_activated_message": {
             "en": "Trial period has been successfully activated ⏳",
             "ru": "Пробный период был успешно активирован ⏳"
+        },
+        "subscription_expired_notification_message": {
+            "en": "Your subscription has expired ⏳",
+            "ru": "Ваша подписка истекла ⏳"
+        },
+        "subscription_last_day_left_notification_message": {
+            "en": "Your subscription will expire in a day ⏳",
+            "ru": "Ваша подписка истекает через день ⏳"
+        },
+        "subscription_last_two_days_left_notification_message": {
+            "en": "Your subscription will expire in two days ⏳",
+            "ru": "Ваша подписка истечет через два дня ⏳"
+        },
+        "subscription_terminated_notification_message": {
+            "en": "Your subscription has been terminated ⏳",
+            "ru": "Ваша подписка удалена ⏳"
+        },
+        "subscription_last_day_left_termination_notification_message": {
+            "en": "Your subscription will be terminated in a day ⏳",
+            "ru": "Ваша подписка будет удалена через день ⏳"
+        },
+        "subscription_last_two_days_left_termination_notification_message": {
+            "en": "Your subscription will expire in two days ⏳",
+            "ru": "Ваша подписка будет удалена через два дня ⏳"
         }
     },
     "button": {

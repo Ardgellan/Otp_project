@@ -8,11 +8,11 @@ from loader import db_manager
 
 
 async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
-    logger.debug("TRIAL_1")
-    sub_is_active = await db_manager.is_subscription_active(call.from_user.id)
-    logger.debug("TRIAL_2")
+    
+    trial_used = await db_manager.is_trial_used(call.from_user.id)
+    
     try:
-        if not sub_is_active:
+        if not trial_used:
             await call.message.answer(
                 text=localizer.get_user_localized_text(
                     user_language_code=call.from_user.language_code,
@@ -42,7 +42,7 @@ async def trial_period_func(call: types.CallbackQuery, state: FSMContext):
 
 async def trial_period_activation_func(call: types.CallbackQuery, state: FSMContext):
     
-    await db_manager.extend_user_subscription(seller_id=call.from_user.id, months=1)
+    await db_manager.activate_trial_period(seller_id=call.from_user.id, months=1)
 
     await call.message.answer(
         text=localizer.get_user_localized_text(

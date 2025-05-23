@@ -90,4 +90,102 @@ class Selector(DatabaseConnector):
             }
         return None
 
+    
+    async def get_sellers_with_subscriptions_expired(self) -> list[int]:
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_until < NOW()
+              AND subscription_is_active = TRUE;
+        """
+        result = await self._execute_query(query)
+        if result:
+            seller_ids = [row[0] for row in result]
+            logger.debug(f"Found {len(seller_ids)} sellers with expired subscriptions")
+            return seller_ids
+        logger.debug("No sellers with expired subscriptions found")
+        return []
+
+    
+    async def get_sellers_to_terminate(self) -> list[int]:
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_is_active = FALSE
+                AND subscription_until + INTERVAL '14 days' < NOW();
+        """
+        result = await self._execute_query(query)
+        sellers = [row[0] for row in result] if result else []
+        logger.debug(f"Found {len(sellers)} sellers to terminate (delete)")
+        return sellers
+
+    
+    async def get_sellers_ids_with_last_day_left_subscription_expiration(self) -> list[int]:
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_is_active = TRUE
+                AND DATE(subscription_until) = DATE(NOW() + INTERVAL '1 day')
+        """
+        result = await self._execute_query(query)
+        sellers = [row[0] for row in result] if result else []
+        logger.debug(f"Found {len(sellers)} sellers with 1 day left before subscription expiration")
+        return sellers
+
+
+    async def get_sellers_ids_with_two_days_left_subscription_expiration(self) -> list[int]:
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_is_active = TRUE
+                AND DATE(subscription_until) = DATE(NOW() + INTERVAL '2 day')
+        """
+        result = await self._execute_query(query)
+        sellers = [row[0] for row in result] if result else []
+        logger.debug(f"Found {len(sellers)} sellers with 2 days left before subscription expiration")
+        return sellers
+
+    
+    async def get_sellers_ids_with_last_day_left_subscription_termination(self) -> list[int]:
+        """
+        Возвращает seller_id, у которых остался 1 день до терминации подписки (после отключения).
+        """
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_is_active = FALSE
+            AND DATE(subscription_until + INTERVAL '14 days') = DATE(NOW() + INTERVAL '1 day');
+        """
+        result = await self._execute_query(query)
+        sellers = [row[0] for row in result] if result else []
+        logger.debug(f"Found {len(sellers)} sellers with 1 day left before subscription termination")
+        return sellers
+
+
+    async def get_sellers_ids_with_two_days_left_subscription_termination(self) -> list[int]:
+        """
+        Возвращает seller_id, у которых осталось 2 дня до терминации подписки (после отключения).
+        """
+        query = """
+            SELECT seller_id
+            FROM sellers
+            WHERE subscription_is_active = FALSE
+            AND DATE(subscription_until + INTERVAL '14 days') = DATE(NOW() + INTERVAL '2 days');
+        """
+        result = await self._execute_query(query)
+        sellers = [row[0] for row in result] if result else []
+        logger.debug(f"Found {len(sellers)} sellers with 2 days left before subscription termination")
+        return sellers
+
+
+    async def is_trial_used(self, seller_id: int) -> bool:
+        query = "SELECT trial_is_used FROM sellers WHERE seller_id = $1"
+        try:
+            async with self._db_pool.acquire() as conn:
+                result = await conn.fetchval(query, seller_id)
+                return result is True
+        except Exception as e:
+            logger.error(f"Ошибка при проверке использования триала для seller_id {seller_id}: {e}")
+            return True  # на всякий случай лучше по дефолту True, чтобы не дать триал
+
 

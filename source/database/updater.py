@@ -8,6 +8,7 @@ class Updater(DatabaseConnector):
         super().__init__()
         logger.debug("Updater object was initialized")
 
+
     async def extend_user_subscription(self, seller_id: int, months: int, conn=None) -> bool:
         query = f"""
             UPDATE sellers
@@ -34,3 +35,33 @@ class Updater(DatabaseConnector):
         except Exception as e:
             logger.error(f"Исключение при продлении подписки пользователя {seller_id}: {e}")
             return False
+
+
+    async def activate_trial_period(self, seller_id: int, months: int = 1, conn=None) -> bool:
+        query = f"""
+            UPDATE sellers
+            SET 
+                subscription_is_active = TRUE,
+                subscription_until = NOW() + INTERVAL '{trial_months} months',
+                last_subscription_payment = NOW(),
+                trial_is_used = TRUE
+            WHERE seller_id = {seller_id}
+            AND trial_is_used = FALSE;  -- чтобы не дать повторно активировать триал
+        """
+        try:
+            if conn:
+                result = await conn.execute(query)
+            else:
+                result = await self._execute_query(query)
+            
+            if result is False or (hasattr(result, "rowcount") and result.rowcount == 0):
+                logger.warning(f"Триал уже использован или ошибка при активации для пользователя {seller_id}")
+                return False
+            
+            logger.info(f"Пробный период активирован для пользователя {seller_id}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Ошибка при активации пробного периода для пользователя {seller_id}: {e}")
+            return False
+

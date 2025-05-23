@@ -42,10 +42,12 @@ async def handle_product_name(message: types.Message, state: FSMContext):
     # Проверка: непустое и не только цифры
     if not product_name or product_name.isdigit():
         await message.answer("❌ Имя товара не может быть пустым или состоять только из цифр. Попробуйте снова.")
+        await ProductInputFlow.waiting_for_product_name.set()  # ВОТ ЭТО ДОБАВЬ
         return
 
     if len(product_name) > 128:
         await message.answer("❌ Имя товара слишком длинное. Максимум 128 символов.")
+        await ProductInputFlow.waiting_for_product_name.set()  # ВОТ ЭТО ДОБАВЬ
         return
 
     await state.update_data(product_name=product_name)

@@ -9,6 +9,8 @@ from .products import *
 from .pay import *
 from .subscription import *
 from .trial import *
+from .edit_product import *
+
 
 def register_seller_handlers(dp: Dispatcher):
     try:
@@ -107,6 +109,31 @@ def register_seller_handlers(dp: Dispatcher):
             trial_period_activation_func,
             lambda call: call.data == "confirm_trial_button",
             state="*",
+        )
+
+        # 🔧 Редактирование товара — начало по кнопке
+        dp.register_callback_query_handler(
+            start_edit_product,
+            lambda call: call.data.startswith("edit_product_"),
+            state="*"
+        )
+
+        # ✏️ Ввод нового имени товара
+        dp.register_message_handler(
+            handle_edit_product_name,
+            state=ProductEditFlow.waiting_for_product_name
+        )
+
+        # 🔢 Ввод нового product_id
+        dp.register_message_handler(
+            handle_edit_product_id,
+            state=ProductEditFlow.waiting_for_product_id
+        )
+
+        # 🔐 Ввод нового OTP
+        dp.register_message_handler(
+            handle_edit_product_otp,
+            state=ProductEditFlow.waiting_for_product_otp
         )
         
     except Exception as e:

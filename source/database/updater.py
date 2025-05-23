@@ -82,7 +82,7 @@ class Updater(DatabaseConnector):
         query = """
             UPDATE products
             SET product_name = $1, product_id = $2, product_otp = $3
-            WHERE seller_id = $4 AND id = $5
+            WHERE seller_id = $4 AND product_id = $5
         """
 
         result = await self._execute_query(query, new_product_name, new_product_id, new_product_otp, seller_id, product_id)

@@ -179,13 +179,15 @@ class Selector(DatabaseConnector):
 
 
     async def is_trial_used(self, seller_id: int) -> bool:
-        query = "SELECT trial_is_used FROM sellers WHERE seller_id = $1"
-        try:
-            async with self._db_pool.acquire() as conn:
-                result = await conn.fetchval(query, seller_id)
-                return result is True
-        except Exception as e:
-            logger.error(f"Ошибка при проверке использования триала для seller_id {seller_id}: {e}")
-            return True  # на всякий случай лучше по дефолту True, чтобы не дать триал
+        query = f"""
+            SELECT trial_is_used
+            FROM sellers
+            WHERE seller_id = {seller_id};
+        """
+        result = await self._execute_query(query)
+        if result:
+            return result[0][0]  # булево значение из базы
+        return False  # Если записи нет — значит триал не использован (по умолчанию)
+
 
 

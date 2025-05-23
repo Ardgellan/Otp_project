@@ -78,5 +78,30 @@ class LocalizedMessageText(BaseLocalizedObject):
     def trial_period_activated_message(self) -> LocalizedText:
         return self._get_entity_text("trial_period_activated_message")
 
+    @property
+    def subscription_expired_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_expired_notification_message")
+
+    @property
+    def subscription_last_day_left_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_last_day_left_notification_message")
+    
+    @property
+    def subscription_last_two_days_left_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_last_two_days_left_notification_message")
+
+    @property
+    def subscription_terminated_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_terminated_notification_message")
+
+    @property
+    def subscription_last_day_left_termination_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_last_day_left_termination_notification_message")
+    
+    @property
+    def subscription_last_two_days_left_termination_notification_message(self) -> LocalizedText:
+        return self._get_entity_text("subscription_last_two_days_left_termination_notification_message")
+
+
 
 

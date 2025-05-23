@@ -53,7 +53,7 @@ async def handle_edit_product_otp(message: types.Message, state: FSMContext):
     data = await state.get_data()
 
     try:
-        await db_manager.update_product_by_id(
+        await db_manager.update_product(
             seller_id=message.from_user.id,
             product_id=data['edit_product_id'],
             new_product_name=data['product_name'],

@@ -66,11 +66,12 @@ class Updater(DatabaseConnector):
             return False
 
         
-    async def update_product(self, seller_id: int, product_db_id: int, name: str, product_id: str, otp: str):
+    async def update_product_by_id(self, seller_id: int, product_id: int, new_product_name: str, new_product_id: str, new_product_otp: str):
         query = """
             UPDATE products
             SET product_name = $1, product_id = $2, product_otp = $3
             WHERE seller_id = $4 AND id = $5
         """
-        await self._execute_query(query, name, product_id, otp, seller_id, product_db_id)
+        await self._execute_query(query, new_product_name, new_product_id, new_product_otp, seller_id, product_id)
+
 

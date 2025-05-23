@@ -24,14 +24,31 @@ async def request_user_for_product_name(call: types.CallbackQuery, state: FSMCon
 
 
 # Обработчик для ввода имени товара
+# async def handle_product_name(message: types.Message, state: FSMContext):
+#     logger.debug("Salam_2")
+#     # Получаем имя товара от пользователя
+#     product_name = message.text
+#     # Сохраняем его в состояние FSM
+#     await state.update_data(product_name=product_name)
+
+#     # Переходим к запросу ID товара
+#     await request_user_for_product_id(message, state)
+
+
 async def handle_product_name(message: types.Message, state: FSMContext):
     logger.debug("Salam_2")
-    # Получаем имя товара от пользователя
-    product_name = message.text
-    # Сохраняем его в состояние FSM
-    await state.update_data(product_name=product_name)
+    product_name = message.text.strip()
 
-    # Переходим к запросу ID товара
+    # Проверка: непустое и не только цифры
+    if not product_name or product_name.isdigit():
+        await message.answer("❌ Имя товара не может быть пустым или состоять только из цифр. Попробуйте снова.")
+        return
+
+    if len(product_name) > 128:
+        await message.answer("❌ Имя товара слишком длинное. Максимум 128 символов.")
+        return
+
+    await state.update_data(product_name=product_name)
     await request_user_for_product_id(message, state)
 
 
@@ -49,15 +66,35 @@ async def request_user_for_product_id(message: types.Message, state: FSMContext)
     await call.answer()
 
 
-# Обработчик для ввода ID товара
+# # Обработчик для ввода ID товара
+# async def handle_product_id(message: types.Message, state: FSMContext):
+#     logger.debug("Salam_4")
+#     # Получаем ID товара от пользователя
+#     product_id = message.text
+#     # Сохраняем его в состояние FSM
+#     await state.update_data(product_id=product_id)
+
+#     # Переходим к запросу OTP товара
+#     await request_user_for_product_otp(message, state)
+
+
 async def handle_product_id(message: types.Message, state: FSMContext):
     logger.debug("Salam_4")
-    # Получаем ID товара от пользователя
-    product_id = message.text
-    # Сохраняем его в состояние FSM
-    await state.update_data(product_id=product_id)
+    product_id_text = message.text.strip()
 
-    # Переходим к запросу OTP товара
+    # Проверка: число
+    if not product_id_text.isdigit():
+        await message.answer("❌ ID товара должен быть числом. Пожалуйста, введите корректный ID.")
+        return
+
+    product_id = int(product_id_text)
+
+    # Проверка: диапазон
+    if product_id <= 0 or product_id > 999999999999:
+        await message.answer("❌ Неверный диапазон ID товара. Попробуйте другое значение.")
+        return
+
+    await state.update_data(product_id=product_id)
     await request_user_for_product_otp(message, state)
 
 
@@ -74,15 +111,31 @@ async def request_user_for_product_otp(message: types.Message, state: FSMContext
     await call.answer()
 
 
-# Обработчик для ввода OTP товара
+# # Обработчик для ввода OTP товара
+# async def handle_product_otp(message: types.Message, state: FSMContext):
+#     logger.debug("Salam_6")
+#     # Получаем OTP от пользователя
+#     product_otp = message.text
+#     # Сохраняем его в состояние FSM
+#     await state.update_data(product_otp=product_otp)
+
+#     # После того как все данные собраны, вызываем функцию для добавления товара в БД
+#     await add_product_to_db_and_notify(message, state)
+
+
 async def handle_product_otp(message: types.Message, state: FSMContext):
     logger.debug("Salam_6")
-    # Получаем OTP от пользователя
-    product_otp = message.text
-    # Сохраняем его в состояние FSM
-    await state.update_data(product_otp=product_otp)
+    product_otp = message.text.strip()
 
-    # После того как все данные собраны, вызываем функцию для добавления товара в БД
+    if not product_otp:
+        await message.answer("❌ OTP не может быть пустым.")
+        return
+
+    if len(product_otp) > 50:
+        await message.answer("❌ OTP слишком длинный. Максимум 50 символов.")
+        return
+
+    await state.update_data(product_otp=product_otp)
     await add_product_to_db_and_notify(message, state)
 
 

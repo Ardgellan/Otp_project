@@ -37,16 +37,16 @@ class Updater(DatabaseConnector):
             return False
 
 
-    async def activate_trial_period(self, seller_id: int, months: int = 1, conn=None) -> bool:
+    async def activate_trial_period(self, seller_id: int, months: int, conn=None) -> bool:
         query = f"""
             UPDATE sellers
             SET 
                 subscription_is_active = TRUE,
-                subscription_until = NOW() + INTERVAL '{trial_months} months',
+                subscription_until = NOW() + INTERVAL '{months} months',
                 last_subscription_payment = NOW(),
                 trial_is_used = TRUE
             WHERE seller_id = {seller_id}
-            AND trial_is_used = FALSE;  -- чтобы не дать повторно активировать триал
+            AND trial_is_used = FALSE;
         """
         try:
             if conn:

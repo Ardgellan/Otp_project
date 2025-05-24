@@ -12,6 +12,7 @@ from source.utils.states.admin_states import AnswerSupport
 async def ask_admin_for_support_answer(
     call: types.CallbackQuery, state: FSMContext, callback_data: dict
 ):
+    logger.debug("support_1")
     await state.finish()
     await call.message.edit_text(
         text=localizer.get_user_localized_text(
@@ -22,6 +23,7 @@ async def ask_admin_for_support_answer(
             language_code=call.from_user.language_code,
         ),
     )
+    logger.debug("support_2")
     question = callback_data.get("question")
     from_user_id = callback_data.get("from_user")
     await state.update_data(support_question=question, from_user_id=from_user_id)

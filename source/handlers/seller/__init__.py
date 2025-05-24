@@ -138,7 +138,7 @@ def register_seller_handlers(dp: Dispatcher):
 
         dp.register_callback_query_handler(
             ask_user_for_question_to_support,
-            lambda call: call.data == "ask_support_button,
+            lambda call: call.data == "ask_support_button",
             state="*",
         )
 

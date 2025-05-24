@@ -35,12 +35,6 @@ def register_seller_handlers(dp: Dispatcher):
             state="*"
         )
 
-        dp.register_callback_query_handler(
-            ,
-            lambda call: call.data == "add_product_button",  # кнопка должна иметь такой data
-            state="*"
-        )
-
          # Обработчики для каждого этапа ввода данных
         dp.register_message_handler(
             handle_product_name,

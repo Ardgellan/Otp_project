@@ -10,6 +10,7 @@ from .pay import *
 from .subscription import *
 from .trial import *
 from .edit_product import *
+from .ask_support import *
 
 
 def register_seller_handlers(dp: Dispatcher):

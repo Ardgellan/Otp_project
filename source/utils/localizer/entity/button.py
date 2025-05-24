@@ -82,5 +82,14 @@ class LocalizedButtonText(BaseLocalizedObject):
     def confirm_trial_button(self) -> LocalizedText:
         return self._get_entity_text("confirm_trial_button")
 
+    @property
+    def ask_support_button(self) -> LocalizedText:
+        return self._get_entity_text("ask_support_button")
+
+    @property
+    def answer_to_user_as_support_button(self) -> LocalizedText:
+        return self._get_entity_text("answer_to_user_as_support_button")
+
+
 
 

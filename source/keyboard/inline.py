@@ -25,6 +25,23 @@ async def insert_button_back_to_main_menu(
     return keyboard
 
 
+async def insert_button_support(
+    keyboard: InlineKeyboardMarkup | None = None, language_code: str = "ru"
+):
+    if not keyboard:
+        keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(
+        InlineKeyboardButton(
+            text=localizer.get_user_localized_text(
+                user_language_code=language_code,
+                text_localization=localizer.button.ask_support_button,
+            ),
+            callback_data="ask_support_button",
+        )
+    )
+    return keyboard
+
+
 async def start_menu_kb(language_code: str):
     keyboard = InlineKeyboardMarkup(row_width=1)
     buttons = [
@@ -49,6 +66,25 @@ async def start_menu_kb(language_code: str):
 
     keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 
+    return keyboard
+
+
+async def admin_support_question_notification_keyboard(
+    question: str, from_user: str, language_code: str, answer: str | None = None
+) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    button = InlineKeyboardButton(
+        text=localizer.get_user_localized_text(
+            user_language_code=language_code,
+            text_localization=localizer.button.answer_to_user_as_support_button,
+        ),
+        callback_data=support_callback.new(
+            question=question[:20],  # just for avoid telegram exception (too long object)
+            from_user=from_user,
+            answer=answer if answer else "NULL",
+        ),
+    )
+    keyboard.insert(button)
     return keyboard
 
 
@@ -94,6 +130,8 @@ async def seller_keyboard(language_code: str):
 
     for button in buttons:
         keyboard.insert(button)
+
+    keyboard = await insert_button_support(keyboard=keyboard, language_code=language_code)
 
     keyboard = await insert_button_back_to_main_menu(keyboard=keyboard, language_code=language_code)
 

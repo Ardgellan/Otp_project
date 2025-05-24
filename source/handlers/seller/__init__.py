@@ -35,6 +35,12 @@ def register_seller_handlers(dp: Dispatcher):
             state="*"
         )
 
+        dp.register_callback_query_handler(
+            ,
+            lambda call: call.data == "add_product_button",  # кнопка должна иметь такой data
+            state="*"
+        )
+
          # Обработчики для каждого этапа ввода данных
         dp.register_message_handler(
             handle_product_name,
@@ -49,12 +55,6 @@ def register_seller_handlers(dp: Dispatcher):
         dp.register_message_handler(
             handle_product_otp,
             state=ProductInputFlow.waiting_for_product_otp
-        )
-
-        dp.register_callback_query_handler(
-            show_seller_products,
-            lambda call: call.data == "my_products_button",  # кнопка должна иметь такой data
-            state="*"
         )
 
         dp.register_callback_query_handler(
@@ -134,6 +134,17 @@ def register_seller_handlers(dp: Dispatcher):
         dp.register_message_handler(
             handle_edit_product_otp,
             state=ProductEditFlow.waiting_for_product_otp
+        )
+
+        dp.register_callback_query_handler(
+            ask_user_for_question_to_support,
+            lambda call: call.data == "ask_support_button,
+            state="*",
+        )
+
+        dp.register_message_handler(
+            forward_question_to_admins,
+            state=AskSupport.waiting_for_question,
         )
         
     except Exception as e:

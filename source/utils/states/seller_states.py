@@ -15,3 +15,7 @@ class ProductEditFlow(StatesGroup):
 
 class AskSupport(StatesGroup):
     waiting_for_question = State()
+
+
+class AskSupport(StatesGroup):
+    waiting_for_question = State()

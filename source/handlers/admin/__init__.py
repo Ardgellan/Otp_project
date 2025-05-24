@@ -23,8 +23,6 @@ def register_admin_handlers(dp: Dispatcher):
             state=AnswerSupport.wait_for_support_answer,
         )
 
-        register_admin_show_user_handlers(dp)
-
     except Exception as e:
         logger.error(f"Error while registering admin handlers: {e}")
 

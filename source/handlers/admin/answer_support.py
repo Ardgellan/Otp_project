@@ -33,6 +33,7 @@ async def ask_admin_for_support_answer(
 async def send_support_answer_to_user(message: types.Message, state: FSMContext):
     support_question = (await state.get_data()).get("support_question")
     question_from_user_id = (await state.get_data()).get("from_user_id")
+    logger.debug("support__answer_1")
     try:
         await message.bot.send_message(
             chat_id=question_from_user_id,
@@ -48,6 +49,7 @@ async def send_support_answer_to_user(message: types.Message, state: FSMContext)
     except BotBlocked:
         logger.error(f"Bot blocked by user {question_from_user_id}")
         return
+    logger.debug("support__answer_2")
     await message.answer(
         text=localizer.get_user_localized_text(
             user_language_code=message.from_user.language_code,
@@ -57,4 +59,5 @@ async def send_support_answer_to_user(message: types.Message, state: FSMContext)
             language_code=message.from_user.language_code,
         ),
     )
+    logger.debug("support__answer_3")
     await state.finish()

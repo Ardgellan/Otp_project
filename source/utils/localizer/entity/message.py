@@ -103,6 +103,10 @@ class LocalizedMessageText(BaseLocalizedObject):
         return self._get_entity_text("subscription_last_two_days_left_termination_notification_message")
 
     @property
+    def ask_support_question_message(self) -> LocalizedText:
+        return self._get_entity_text("ask_support_question_message")
+
+    @property
     def support_question_sent_by_user_message(self) -> LocalizedText:
         return self._get_entity_text("support_question_sent_by_user_message")
 

@@ -92,6 +92,10 @@
             "en": "Your subscription will expire in two days ⏳",
             "ru": "Ваша подписка будет удалена через два дня ⏳"
         },
+        "ask_support_question_message": {
+            "en": "📝Please, enter your question for support. We will study it most carefully!",
+            "ru": "📝Пожалуйста, введите свой вопрос для службы поддержки. Мы изучим его самым внимательным образом!"
+        },
         "support_question_sent_by_user_message": {
             "en": "✅ Your question has been sent to the support service. The administration will respond to you as soon as possible!",
             "ru": "✅ Ваш вопрос отправлен в службу поддержки. Администрация ответит вам в ближайшее время!"
